@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Aims Shop</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <!--new strings-->
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_confirm_password_hint">Confirm Password</string>
+    <string name="account">Account</string>
+    <string name="slogn"><font color="#FF0000">बजार</font> भन्दा सस्तो पनि <font color="#FF0000">घरमै</font> पनि</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_home"><font size="10">Home</font></string>
+    <string name="title_categories"><font size="10">Categories</font></string>
+    <string name="title_orders"><font size="10">Orders</font></string>
+    <string name="title_account"><font size="10">Account</font></string>
+    <string name="search_here"><font color="#FF7700" size="13">Search Here</font></string>
+    <string name="action_search">Search</string>
+    <string name="action_wishlist">WishList</string>
+    <string name="action_cart">Cart</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="register">Register</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="company_name">Company Name</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="use_other_methods">Use Other Methods</string>
+    <string name="product_name">Product Name</string>
+    <string name="success_register">Successfully Register</string>
+    <string name="address1">Address 1</string>
+    <string name="address2">Address 2</string>
+    <string name="city">City</string>
+    <string name="cash_on_delivery">Cash On Delivery</string>
+    <string name="online_payment">Online Payment</string>
+    <string name="already_have_address">I want to use an existing address</string>
+    <string name="new_address">I want to use a new address</string>
+    <string name="continue_shopping"><font size="14">Continue\nShopping</font></string>
+    <string name="checkout"><font size="17">CheckOut</font></string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="connection_time_out">Connection time out</string>
+    <string name="something_went_wrong">Something went screwy</string>
+    <string name="featured">Featured</string>
+    <string name="privacy_policy">I have read and agree to the Privacy Policy</string>
+    <string name="category_featured">Category Featured</string>
+
+    <string name="text_expanded">Expanded</string>
+    <string name="text_collapsed">Collapsed</string>
+    <string name="add_to_cart"><font size="14">Add To Cart</font></string>
+    <string name="are_you_sure"><font size="14">Are you sure you want to exit Aims Shop?</font></string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
+    <string name="exit"><font size="16">Exit</font></string>
+    <string name="bagmati_kathmandu">Bagmati, Kathmandu</string>
+    <string name="home_delivery_24_hours_within">Home Delivery 24 hours (within)</string>
+    <string name="delivery_charge_rs_50">Delivery Charge Rs. 50</string>
+    <string name="related_products">Related Products</string>
+    <string name="success">Successfully Added to Cart</string>
+    <string name="title_activity_delivery_location">Map</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="aims_latitude">27.691401</string>
+    <string name="aims_longitude">85.369334</string>
+
+
+
+</resources>

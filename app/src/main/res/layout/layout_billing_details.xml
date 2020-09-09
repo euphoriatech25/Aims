@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sub_billinglayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioGroup
+            android:id="@+id/radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/already_have_address" />
+
+            <RadioButton
+                android:id="@+id/newAddressLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_address" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/new_address_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp15"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="@string/first_name"
+                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_box"
+                    android:gravity="center_vertical"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="textPersonName|textCapCharacters"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:translationY="@dimen/dp5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:hint="@string/last_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_box"
+                    android:gravity="center_vertical"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="textPersonName|textCapCharacters"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:translationY="@dimen/dp5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="@string/company_name"
+                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_box"
+                    android:inputType="textPersonName|textCapCharacters"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:translationY="@dimen/dp5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="@string/address1">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_box"
+                    android:inputType="textPersonName|textCapCharacters"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:translationY="@dimen/dp5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="@string/address2">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_box"
+                    android:inputType="textPersonName|textCapCharacters"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:translationY="@dimen/dp5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="@string/city">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_box"
+                    android:inputType="textPersonName|textCapCharacters"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:translationY="@dimen/dp5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="Post Code">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_box"
+                    android:inputType="textPersonName|textCapCharacters"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:translationY="@dimen/dp5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="Region / State">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_box"
+                    android:inputType="textPersonName|textCapCharacters"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:translationY="@dimen/dp5" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <Button
+            style="@style/loginButton"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/dp40"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/dp10"
+            android:text="Continue" />
+
+    </LinearLayout>
+
+</LinearLayout>
