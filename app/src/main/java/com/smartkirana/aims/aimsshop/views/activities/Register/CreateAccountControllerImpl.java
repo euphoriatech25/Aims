@@ -19,7 +19,7 @@ public class CreateAccountControllerImpl implements ICreateAccount.Controller {
     @Override
     public void createAccount(@NotNull CreateAccountModel model, @NotNull ICreateAccount.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
-        Call<CreateAccountModel> call = post.createAccount(model);
+        Call<CreateAccountModel> call = post.createAccount(model.getFirstName(),model.getLastName(),model.getEmail(),model.getTelephone(),model.getPassword(),model.getConfirm(),model.getAgree());
         call.enqueue(new Callback<CreateAccountModel>() {
             @Override
             public void onResponse(Call<CreateAccountModel> call, Response<CreateAccountModel> response) {

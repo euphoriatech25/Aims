@@ -26,7 +26,6 @@ public class CurrentLocation  extends   AppCompatActivity implements LocationLis
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
     Location location;
-//    TextView tvLatitude, tvLongitude, tvTime;
     LocationManager locationManager;
     Location loc;
     ArrayList<String> permissions = new ArrayList<>();

@@ -15,15 +15,15 @@ interface ISearch {
 
     interface Presenter : BasePresenter {
         fun getProductList()
-        fun addToCart(product_id: String,api_token: String)
-        fun addWishList(product_id: String ,api_token: String)
+        fun addToCart(product_id: String,customer_id: String,api_token: String)
+        fun addWishList(product_id: String ,customer_id: String,api_token: String)
     }
 
 
     interface Controller {
         fun getProductList(map: Map<String?, String?>?, listener: OnFinishListener?)
-        fun addToCart(route: String, api_token: String, product_id: String, listener: ISearch.OnFinishListener)
-        fun addWishList(product_id: String,api_token: String, route: String, listener: ISearch.OnFinishListener)
+        fun addToCart(route: String, api_token: String, product_id: String, customer_id: String,listener: ISearch.OnFinishListener)
+        fun addWishList(product_id: String,customer_id: String,api_token: String, route: String, listener: ISearch.OnFinishListener)
     }
 
     interface OnFinishListener : BaseResponse {

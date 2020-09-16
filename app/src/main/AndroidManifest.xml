@@ -26,11 +26,13 @@
             android:label="@string/title_home"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".views.activities.SearchActivity.SearchProductActivity" />
+        <activity android:name=".views.activities.CheckOut.CheckoutActivity" />
         <activity android:name=".views.activities.SubCategories.SubCategories" />
         <activity
             android:name=".views.activities.Login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".views.activities.WishList.WishListActivity" />
+<!--        <activity android:name=".DeliveryLocationView.DeliveryLocationActivity" />-->
         <activity android:name=".views.activities.Cart.CartActivity" />
         <activity
             android:name=".views.activities.Register.CreateAccountActivity"

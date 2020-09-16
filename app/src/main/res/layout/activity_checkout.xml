@@ -1,7 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +36,10 @@
                     android:textSize="@dimen/dp15"
                     android:textStyle="bold" />
 
-                <include layout="@layout/layout_billing_details" />
+                <FrameLayout
+                    android:id="@+id/billingAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -56,13 +60,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp15"
-                    android:drawableEnd="@drawable/ic_drop_down"
                     android:text="Delivery Details "
                     android:textColor="@color/account"
                     android:textSize="@dimen/dp15"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:drawableEndCompat="@drawable/ic_drop_down" />
 
-                <include layout="@layout/layout_billing_details" />
+                <FrameLayout
+                    android:id="@+id/deliveryAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -85,7 +92,32 @@
                     android:textColor="@color/account"
                     android:textSize="@dimen/dp15"
                     android:textStyle="bold" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Please select the preferred shipping method to use on this order."/>
+
+                    <RadioButton
+                     android:layout_marginLeft="@dimen/dp10"
+                        android:text="Flat Shipping Rate - Rs. 5.00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp40"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_margin="12dp"
+                        android:background="@drawable/edit_box" />
+                </LinearLayout>
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
 
@@ -108,8 +140,10 @@
                     android:textColor="@color/account"
                     android:textSize="@dimen/dp15"
                     android:textStyle="bold" />
-
-                <include layout="@layout/layout_payment_method" />
+                <FrameLayout
+                    android:id="@+id/paymentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -157,7 +191,6 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
 
 
     </LinearLayout>

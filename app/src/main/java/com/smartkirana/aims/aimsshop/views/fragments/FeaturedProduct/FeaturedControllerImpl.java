@@ -46,10 +46,10 @@ public class FeaturedControllerImpl implements IFeature.Controller{
     }
 
     @Override
-    public void addToCart(@NotNull String route, @NotNull String api_token, @NotNull String product_id, @NotNull IFeature.OnFinishListener listener) {
+    public void addToCart(@NotNull String route, @NotNull String api_token,@NotNull String product_id ,@NotNull String customer_id,@NotNull IFeature.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
 
-        Call<ResponseBody> call = post.addAddToCart(route,api_token,product_id);
+        Call<ResponseBody> call = post.addAddToCart(route,api_token,product_id,customer_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -77,9 +77,9 @@ public class FeaturedControllerImpl implements IFeature.Controller{
     }
 
     @Override
-    public void addWishList(@NotNull String product_id, @NotNull String api_token, @NotNull String route, @NotNull IFeature.OnFinishListener listener) {
+    public void addWishList(@NotNull String product_id,@NotNull String cusmoter_id, @NotNull String api_token, @NotNull String route, @NotNull IFeature.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
-        Call<ResponseBody> call = post.addWishList(route,api_token,product_id);
+        Call<ResponseBody> call = post.addWishList(route,api_token,product_id,cusmoter_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

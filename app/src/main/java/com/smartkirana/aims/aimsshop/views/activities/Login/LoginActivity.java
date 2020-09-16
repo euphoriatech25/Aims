@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.smartkirana.aims.aimsshop.R;
 import com.smartkirana.aims.aimsshop.utils.AppUtils;
 import com.smartkirana.aims.aimsshop.utils.PrefConstants;
+import com.smartkirana.aims.aimsshop.views.activities.Home.HomeActivity;
 import com.smartkirana.aims.aimsshop.views.activities.Register.CreateAccountActivity;
 import com.smartkirana.aims.aimsshop.views.activities.Register.CreateAccountModel;
 import com.smartkirana.aims.aimsshop.views.activities.base.BaseActivity;
@@ -31,11 +32,11 @@ public class LoginActivity extends BaseActivity implements ILogin.View, View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginButton=findViewById(R.id.loginButton);
+        loginButton = findViewById(R.id.loginButton);
         email = findViewById(R.id.editTextEmail);
-        progressBar=findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
         password = findViewById(R.id.editTextPassword);
-        email.setText("sadi@gmail.com");
+        email.setText("sas@gmail.com");
         password.setText("12345678");
         loginButton.setOnClickListener(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -74,28 +75,36 @@ public class LoginActivity extends BaseActivity implements ILogin.View, View.OnC
 
 
     @Override
-    public void setEmailInvalid() { AppUtils.invalidEmail(email); }
+    public void setEmailInvalid() {
+        AppUtils.invalidEmail(email);
+    }
 
     @Override
     public void onSuccess(@NotNull CreateAccountModel createAccountModel) {
-        SharedPreferences sharedPreferences =getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
-        SharedPreferences.Editor myEdit = sharedPreferences.edit();
-        myEdit.putString(PrefConstants.API_TOKEN,createAccountModel.getApiToken());
-        myEdit.apply();
-        Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
-        finish();
+        CreateAccountModel.Customer customer = createAccountModel.getCustomer();
 
+        SharedPreferences sharedPreferences = getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        myEdit.putString(PrefConstants.API_TOKEN, createAccountModel.getApiToken());
+        myEdit.putString(PrefConstants.CUSTOMER_NAME, customer.getFullname());
+        myEdit.putString(PrefConstants.CUSTOMER_ID, customer.getCustomerId());
+        myEdit.apply();
+
+        Toast.makeText(this, "Welcome " +customer.getFullname(), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 
     @Override
     public void onFailure(@NotNull String message) {
-            AppUtils.showSnackBar(view, message);
+        AppUtils.showSnackBar(view, message);
     }
 
     @Override
     public void noInternetConnection() {
         Toast.makeText(this, "No Internet Available", Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void showProgressBar(boolean showpBar) {
         AppUtils.showProgressBar(showpBar, progressBar);

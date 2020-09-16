@@ -30,7 +30,7 @@ public class RecentProductAdapter extends RecyclerView.Adapter<RecentProductAdap
     List<ProductDetailsModel.RelatedProduct> products;
     boolean isOpen = false;
     FeaturedPresenterImpl presenter;
-    String api_token;
+    String api_token,customer_id;
 
     private OnItemClickListener mListener;
 
@@ -59,6 +59,7 @@ public class RecentProductAdapter extends RecyclerView.Adapter<RecentProductAdap
     public void onBindViewHolder(@NonNull RecyclerViewCartHolder holder, int position) {
         SharedPreferences prefs = context.getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
+        customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
 
         holder.product_name.setText(products.get(position).getName());
         String special = products.get(position).getSpecial();
@@ -72,7 +73,7 @@ public class RecentProductAdapter extends RecyclerView.Adapter<RecentProductAdap
                     if (!api_token.equalsIgnoreCase("No Api Token Found") && !TextUtils.isEmpty(product_id)) {
                         holder.wishlist_fav.setColorFilter(Color.parseColor("#FD0505"));
                         presenter = new FeaturedPresenterImpl(context, new FeaturedControllerImpl());
-                        presenter.addWishList(products.get(position).getProductId(), api_token);
+                        presenter.addWishList(products.get(position).getProductId(), api_token,customer_id);
                         isOpen = false;
                     }
                 } else {
@@ -85,9 +86,9 @@ public class RecentProductAdapter extends RecyclerView.Adapter<RecentProductAdap
         holder.addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!api_token.equalsIgnoreCase("No Api Token Found") && !TextUtils.isEmpty(product_id)) {
+                if (!api_token.equalsIgnoreCase("No Api Token Found") && !TextUtils.isEmpty(product_id)&& !TextUtils.isEmpty(customer_id)) {
                     FeaturedPresenterImpl presenter = new FeaturedPresenterImpl(context, new FeaturedControllerImpl());
-                    presenter.addToCart(products.get(position).getProductId(), api_token);
+                    presenter.addToCart(products.get(position).getProductId(), api_token,customer_id);
                 } else {
                     AppUtils.showToast(context,"Please Login/Sign up first");
 

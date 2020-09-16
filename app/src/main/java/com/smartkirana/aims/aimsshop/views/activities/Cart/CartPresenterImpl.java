@@ -15,10 +15,10 @@ public class CartPresenterImpl implements ICart.Presenter, ICart.OnFinishListene
     }
 
     @Override
-    public void getCartProductList(String api_token) {
+    public void getCartProductList(String api_token, @NotNull String customer_id) {
         if (view != null) {
             view.showProgressBar(true);
-            controller.getCartProductList(EndPoints.CART_PRODUCTS, api_token, this);
+            controller.getCartProductList(EndPoints.CART_PRODUCTS, api_token, customer_id,this);
         }
     }
 
@@ -92,19 +92,19 @@ public class CartPresenterImpl implements ICart.Presenter, ICart.OnFinishListene
     }
 
     @Override
-    public void editCartProduct(@NotNull String key, @NotNull String quantity, @NotNull String api_token) {
+    public void editCartProduct(@NotNull String key, @NotNull String quantity,@NotNull String customer_id, @NotNull String api_token) {
         if (view != null) {
             view.showProgressBar(true);
-            controller.editProductList(EndPoints.CART_EDIT, api_token, key, quantity,this);
+            controller.editProductList(EndPoints.CART_EDIT, api_token,customer_id, key, quantity,this);
 
         }
     }
 
     @Override
-    public void removeCartProduct(@NotNull String key, @NotNull String api_token) {
+    public void removeCartProduct(@NotNull String key, @NotNull String customer_id,@NotNull String api_token) {
         if (view != null) {
             view.showProgressBar(true);
-            controller.removeCartProduct(EndPoints.CART_REMOVE, api_token, key, this);
+            controller.removeCartProduct(EndPoints.CART_REMOVE, api_token,customer_id, key, this);
 
         }
     }

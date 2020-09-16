@@ -1,6 +1,10 @@
 package com.smartkirana.aims.aimsshop.views.activities.CheckOut
 
+import com.smartkirana.aims.aimsshop.interfaces.BasePresenter
+import com.smartkirana.aims.aimsshop.interfaces.BaseResponse
 import com.smartkirana.aims.aimsshop.interfaces.BaseView
+import com.smartkirana.aims.aimsshop.views.activities.ProductDetails.IProductDetails
+import com.smartkirana.aims.aimsshop.views.activities.ProductDetails.ProductDetailsModel
 
 internal interface ICheckout {
     interface View : BaseView {
@@ -20,7 +24,26 @@ internal interface ICheckout {
         fun setCity(): String
         fun setPostCode(): String
         fun setRegion(): String
+
         fun onSuccess()
         fun onFailure(message: String)
+        fun showStub(show: Boolean)
+
     }
+    interface Presenter : BasePresenter {
+        fun addAddress(customer_id: String,checkoutModel:CheckoutModel)
+    }
+
+
+    interface Controller {
+          fun addAddress(route: String, customer_id: String,checkoutModel:CheckoutModel,listener: IProductDetails.OnFinishListener)
+
+    }
+
+    interface OnFinishListener : BaseResponse {
+        fun onSuccess(message: String?)
+        fun onFailure(message: String?)
+        fun onNoData()
+    }
+
 }

@@ -31,7 +31,7 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
     View view;
     boolean isOpen = false;
     FeaturedPresenterImpl presenter;
-    String api_token;
+    String api_token,customer_id;
 
     private OnItemClickListener mListener;
 
@@ -60,6 +60,7 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
     public void onBindViewHolder(@NonNull RecyclerViewCartHolder holder, int position) {
         SharedPreferences prefs = context.getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
+        customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
 
         holder.product_name.setText(featureds.get(position).getName());
         String special = featureds.get(position).getSpecial();
@@ -82,7 +83,7 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
                 if (isOpen) {
                     if (!api_token.equalsIgnoreCase("No Api Token Found") && !TextUtils.isEmpty(product_id)) {
                         presenter = new FeaturedPresenterImpl(context, new FeaturedControllerImpl());
-                        presenter.addWishList(featureds.get(position).getProductId(), api_token);
+                        presenter.addWishList(featureds.get(position).getProductId(), api_token,customer_id);
                         isOpen = false;
                         holder.wishlist_fav.setColorFilter(Color.parseColor("#FD0505"));
                     }else {
@@ -102,7 +103,7 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
 
                 if (!api_token.equalsIgnoreCase("No Api Token Found") && !TextUtils.isEmpty(product_id)) {
                     presenter = new FeaturedPresenterImpl(context, new FeaturedControllerImpl());
-                    presenter.addToCart(product_id, api_token);
+                    presenter.addToCart(product_id, customer_id,api_token);
                 }else {
                     AppUtils.showToast(context,"Please Login/Sign up first");
                 }
@@ -116,6 +117,9 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
             holder.product_unit_price.setText(featureds.get(position).getSpecial());
             holder.product_total_price.setText(featureds.get(position).getPrice());
             holder.product_total_price.setPaintFlags(holder.product_total_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.itemCardPromotion.setVisibility(View.VISIBLE);
+//            float dis=100*((Float.parseFloat(featureds.get(position).getPrice())-Float.parseFloat(featureds.get(position).getSpecial()))/Float.parseFloat(featureds.get(position).getPrice()));
+            holder.itemCardPromotion.setText("-"+"20"+"%");
 
         }
     }
@@ -127,7 +131,7 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
 
     class RecyclerViewCartHolder extends RecyclerView.ViewHolder {
         ImageView product_image, wishlist_fav, addToCart;
-        TextView product_name, product_unit_price, product_total_price, product_description;
+        TextView product_name, product_unit_price, product_total_price, product_description,itemCardPromotion;
 
         public RecyclerViewCartHolder(@NonNull View itemView) {
             super(itemView);
@@ -137,6 +141,7 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
             product_unit_price = itemView.findViewById(R.id.product_actual_price);
             product_total_price = itemView.findViewById(R.id.product_special_price);
             product_description = itemView.findViewById(R.id.product_description);
+            itemCardPromotion=itemView.findViewById(R.id.itemCardPromotion);
             wishlist_fav = itemView.findViewById(R.id.favorite);
             addToCart = itemView.findViewById(R.id.addToCart);
             itemView.setOnClickListener(new View.OnClickListener() {

@@ -81,7 +81,7 @@ public class SliderFragment extends Fragment {
 
             @Override
             public void onFailure(Call<SliderModel> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });

@@ -17,8 +17,8 @@ public class LoginControllerImpl implements ILogin.Controller{
     @Override
     public void loginUser(@NotNull CreateAccountModel model, @NotNull ILogin.OnFinishListener listener) {
             RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
-            Call<CreateAccountModel> call = post.loginUser(model);
-            call.enqueue(new Callback<CreateAccountModel>() {
+        Call<CreateAccountModel> call = post.loginUser(model.getEmail(),model.getPassword(),model.getUsername(),model.getKey());
+        call.enqueue(new Callback<CreateAccountModel>() {
                 @Override
                 public void onResponse(Call<CreateAccountModel> call, Response<CreateAccountModel> response) {
                     if (response.isSuccessful()) {

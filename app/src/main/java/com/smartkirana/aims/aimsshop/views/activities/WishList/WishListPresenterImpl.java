@@ -74,11 +74,11 @@ public class WishListPresenterImpl implements IWishList.Presenter, IWishList.OnF
 
 
     @Override
-    public void getWishList(@NotNull String api_token) {
+    public void getWishList(@NotNull String api_token,@NotNull String customer_id) {
         if (view != null) {
 //            if (AppUtils.isNetworkAvailable()) {
             view.showProgressBar(true);
-            controller.getWishList(EndPoints.WISHLIST_GET,api_token,this);
+            controller.getWishList(EndPoints.WISHLIST_GET,api_token,customer_id,this);
 //            } else {
 //                view.noInternetConnection();
 //            }
@@ -86,11 +86,11 @@ public class WishListPresenterImpl implements IWishList.Presenter, IWishList.OnF
     }
 
     @Override
-    public void removeWishList(@NotNull String api_token, @NotNull String product_id) {
+    public void removeWishList(@NotNull String api_token, @NotNull String product_id,@NotNull String customer_id) {
         if (view != null) {
 //            if (AppUtils.isNetworkAvailable()) {
             view.showProgressBar(true);
-            controller.removeWishList(EndPoints.WISHLIST_REMOVE,api_token,product_id,this);
+            controller.removeWishList(EndPoints.WISHLIST_REMOVE,api_token,product_id,customer_id,this);
 //            } else {
 //                view.noInternetConnection();
 //            }
@@ -106,11 +106,11 @@ public class WishListPresenterImpl implements IWishList.Presenter, IWishList.OnF
     }
 
     @Override
-    public void addToCart(@NotNull String api_token, @NotNull String product_id) {
+    public void addToCart(@NotNull String api_token, @NotNull String product_id,@NotNull String customer_id) {
         if (view != null) {
 //            if (AppUtils.isNetworkAvailable()) {
             view.showProgressBar(true);
-            controller.removeWishList(EndPoints.ADD_TO_CART,api_token,product_id,this);
+            controller.addToCart(EndPoints.ADD_TO_CART,api_token,product_id,customer_id,this);
 //            } else {
 //                view.noInternetConnection();
 //            }

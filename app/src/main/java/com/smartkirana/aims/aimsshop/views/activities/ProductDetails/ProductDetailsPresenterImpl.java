@@ -79,9 +79,9 @@ public class ProductDetailsPresenterImpl implements IProductDetails.Presenter, I
     }
 
     @Override
-    public void addToCart(@NotNull String product_id,@NotNull String api_token) {
+    public void addToCart(@NotNull String product_id,@NotNull String customer_id,@NotNull String api_token) {
         if(view!=null){
-            controller.addToCart(EndPoints.ADD_TO_CART, api_token, product_id, this);
+            controller.addToCart(EndPoints.ADD_TO_CART, api_token,customer_id, product_id, this);
         }else {
             view.unKnownError();
         }
@@ -108,9 +108,9 @@ public class ProductDetailsPresenterImpl implements IProductDetails.Presenter, I
     }
 
     @Override
-    public void addWishList(@NotNull String product_id, @NotNull String api_token) {
+    public void addWishList(@NotNull String product_id, @NotNull String api_token, @NotNull String customer_id) {
         if(view!=null){
-            controller.addWishList(EndPoints.WISHLIST_ADD, api_token, product_id, this);
+            controller.addWishList(EndPoints.WISHLIST_ADD, api_token,customer_id, product_id, this);
         }else {
             view.unKnownError();
         }

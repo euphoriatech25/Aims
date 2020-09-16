@@ -99,21 +99,21 @@ public class SearchPresenterImpl implements ISearch.Presenter, ISearch.OnFinishL
     }
 
     @Override
-    public void addToCart(@NotNull String product_id,@NotNull String api_token) {
+    public void addToCart(@NotNull String product_id,@NotNull String customer_id,@NotNull String api_token) {
         if(view!=null){
-            controller.addToCart(EndPoints.ADD_TO_CART, api_token, product_id, this);
+            controller.addToCart(EndPoints.ADD_TO_CART, api_token, product_id,customer_id, this);
         }else {
             view.unKnownError();
         }
     }
 
     @Override
-    public void addWishList(@NotNull String product_id, @NotNull String api_token) {
+    public void addWishList(@NotNull String product_id,@NotNull String customer_id, @NotNull String api_token) {
         if (view != null) {
 //            if (AppUtils.isNetworkAvailable()) {
             view.showProgressBar(true);
 
-            controller.addWishList(product_id,api_token, EndPoints.WISHLIST_ADD, this);
+            controller.addWishList(product_id,customer_id,api_token, EndPoints.WISHLIST_ADD, this);
 //            } else {
 //                view.noInternetConnection();
 //            }

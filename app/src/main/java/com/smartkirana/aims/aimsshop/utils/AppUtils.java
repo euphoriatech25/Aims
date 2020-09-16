@@ -16,19 +16,24 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 
-import com.bumptech.glide.BuildConfig;
 import com.google.android.material.snackbar.Snackbar;
+import com.smartkirana.aims.aimsshop.BuildConfig;
 import com.smartkirana.aims.aimsshop.MyApp;
+import com.smartkirana.aims.aimsshop.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -37,6 +42,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class AppUtils {
@@ -58,24 +64,8 @@ public class AppUtils {
         }
     }
 
-    public static void customSnackBar(){
-//        Snackbar snackbar = Snackbar.make(containerLayout, "", Snackbar.LENGTH_LONG);
-//        Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
-//
-//        TextView textView = (TextView) layout.findViewById(android.support.design.R.id.snackbar_text);
-//        textView.setVisibility(View.INVISIBLE);
-//
-//        View snackView = mInflater.inflate(R.layout.my_snackbar, null);
-//
-//        ImageView imageView = (ImageView) snackView.findViewById(R.id.image);
-//        imageView.setImageBitmap(image);
-//        TextView textViewTop = (TextView) snackView.findViewById(R.id.text);
-//        textViewTop.setText(text);
-//        textViewTop.setTextColor(Color.WHITE);
-//        layout.addView(snackView, 0);
-//// Show the Snackbar
-//        snackbar.show();
-    }
+
+
 
     public static void freezeUi(Activity activity, boolean showProgress) {
         if (showProgress) {
@@ -99,12 +89,11 @@ public class AppUtils {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
     }
 
-    public static boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) MyApp.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
+//    public static boolean isNetworkAvailable() {
+//        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo netInfo = Objects.requireNonNull(cm).getActiveNetworkInfo();
+//        return netInfo != null && netInfo.isConnectedOrConnecting();
+//    }
 
     public static void setError(EditText editText) {
         editText.setError("Field required");

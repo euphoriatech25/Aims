@@ -12,10 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/featured"
-        android:layout_margin="5dp"
+        android:layout_margin="4dp"
         android:gravity="left"
         android:textStyle="bold"
-        android:textColor="@color/account"
         android:textSize="@dimen/sp16"/>
 
     <androidx.recyclerview.widget.RecyclerView

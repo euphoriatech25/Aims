@@ -3,8 +3,6 @@ package com.smartkirana.aims.aimsshop.views.fragments.FeaturedProduct
 import com.smartkirana.aims.aimsshop.interfaces.BasePresenter
 import com.smartkirana.aims.aimsshop.interfaces.BaseResponse
 import com.smartkirana.aims.aimsshop.interfaces.BaseView
-import com.smartkirana.aims.aimsshop.views.activities.WishList.IWishList
-import com.smartkirana.aims.aimsshop.views.fragments.AddToCart.IAddToCart
 
 interface IFeature {
     interface View : BaseView {
@@ -20,15 +18,15 @@ interface IFeature {
 
     interface Presenter : BasePresenter {
         fun getFeaturedList()
-        fun addToCart(product_id: String,api_token: String)
-        fun addWishList(product_id: String,api_token: String)
+        fun addToCart(product_id: String,customer_id: String,api_token: String)
+        fun addWishList(product_id: String,customer_id: String,api_token: String)
     }
 
 
     interface Controller {
         fun getFeaturedList(map: Map<String?, String?>?, listener: OnFinishListener?)
-        fun addToCart(route: String, api_token: String, product_id: String, listener:OnFinishListener)
-        fun addWishList(product_id: String,api_token: String, route: String, listener: OnFinishListener)
+        fun addToCart(route: String, api_token: String, product_id: String, customer_id: String, listener:OnFinishListener)
+        fun addWishList(product_id: String,customer_id:String,api_token: String, route: String, listener: OnFinishListener)
     }
 
     interface OnFinishListener : BaseResponse {

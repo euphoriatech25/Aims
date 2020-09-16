@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartkirana.aims.aimsshop.R;
@@ -26,7 +26,7 @@ public class CategoriesFragment extends Fragment implements ICategories.View, Ca
     CategoriesModel featuredModel;
     List<CategoriesModel.Featuredcategory> featuredList;
     private CategoriesPresenterImpl presenter;
-    private GridLayoutManager layoutManager;
+    private LinearLayoutManager layoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -34,7 +34,10 @@ public class CategoriesFragment extends Fragment implements ICategories.View, Ca
         productRecycle = view.findViewById(R.id.recyclerviewFeature);
         presenter = new CategoriesPresenterImpl(this, new CategoriesControllerImpl());
         presenter.getFeatureCategoriesList();
-        layoutManager = new GridLayoutManager(getContext(), 2);
+         layoutManager
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+//        layoutManager = new GridLayoutManager(getContext(), 2);
         productRecycle.setLayoutManager(layoutManager);
         productRecycle.setHasFixedSize(true);
         productRecycle.setFocusable(false);

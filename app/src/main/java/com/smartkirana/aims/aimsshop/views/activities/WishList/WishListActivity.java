@@ -36,7 +36,7 @@ public class WishListActivity extends BaseActivity implements IWishList.View {
     WishListPresenterImpl presenter;
     View view;
     LinearLayout wishlist_layout;
-    String api_token;
+    String api_token,customer_id;
     ProgressBar progressBar;
     private String product_id_public;
 
@@ -57,8 +57,9 @@ public class WishListActivity extends BaseActivity implements IWishList.View {
         presenter = new WishListPresenterImpl((IWishList.View) this, new WishListControllerImpl());
         SharedPreferences prefs = getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
+        customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
 
-        presenter.getWishList(api_token);
+        presenter.getWishList(api_token,customer_id);
 
         changeStatusBarColor();
     }
@@ -142,8 +143,8 @@ public class WishListActivity extends BaseActivity implements IWishList.View {
                 wishlist_remove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id)) {
-                            presenter.removeWishList(api_token, product_id);
+                        if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id)&& !TextUtils.isEmpty(customer_id)) {
+                            presenter.removeWishList(api_token, product_id,customer_id);
                         } else {
                             AppUtils.showToast(WishListActivity.this, "something went wrong");
                         }
@@ -152,16 +153,14 @@ public class WishListActivity extends BaseActivity implements IWishList.View {
                 wishlist_addtocart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id)) {
-                            presenter.addToCart(api_token, product_id);
-                            presenter.removeWishList(api_token, product_id);
+                        if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id) && !TextUtils.isEmpty(customer_id)) {
+                            presenter.addToCart(api_token, product_id,customer_id);
+                            presenter.removeWishList(api_token, product_id,customer_id);
                         } else {
                             AppUtils.showToast(WishListActivity.this, "something went wrong");
                         }
                     }
                 });
-
-
                 wishlist_layout.addView(itemView);
             }
         } else {
@@ -193,7 +192,7 @@ public class WishListActivity extends BaseActivity implements IWishList.View {
     @Override
     public void onAddtoCartSuccess(@Nullable String message) {
         if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id_public)) {
-            presenter.removeWishList(api_token, product_id_public);
+            presenter.removeWishList(api_token, product_id_public,customer_id);
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

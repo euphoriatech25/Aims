@@ -44,7 +44,7 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
     ProgressBar progressBar;
     String name;
     private CartPresenterImpl presenter;
-    private String api_token;
+    private String api_token,customer_id;
     private Button continue_shopping, checkout, continue_shopping_empty;
     int productQuantity = 0;
     List<CartModel.Product> selectedProducts = new ArrayList<CartModel.Product>();
@@ -68,9 +68,10 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
 
         SharedPreferences prefs = getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
+        customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
 
         presenter = new CartPresenterImpl(this, new CartControllerImpl());
-        presenter.getCartProductList(api_token);
+        presenter.getCartProductList(api_token,customer_id);
         continue_shopping.setOnClickListener(this);
         checkout.setOnClickListener(this);
         init();
@@ -146,7 +147,7 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
             removeCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    presenter.removeCartProduct(cart_id, api_token);
+                    presenter.removeCartProduct(cart_id,customer_id,api_token);
                 }
             });
 
@@ -184,7 +185,7 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
             quantity_update.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    presenter.editCartProduct(cart_id, product_quantity.getText().toString(), api_token);
+                    presenter.editCartProduct(cart_id, product_quantity.getText().toString(),customer_id, api_token);
                 }
             });
 

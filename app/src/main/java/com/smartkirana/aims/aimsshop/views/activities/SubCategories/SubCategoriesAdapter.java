@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class SubCategoriesAdapter  extends RecyclerView.Adapter<SubCategoriesAda
     List<SubCategoriesModel.Product> products;
     boolean isOpen = false;
     SubCategoriesPresenterImpl presenter;
-    String api_token;
+    String api_token,customer_id;
 
     private OnItemClickListener mListener;
 
@@ -59,6 +60,10 @@ public class SubCategoriesAdapter  extends RecyclerView.Adapter<SubCategoriesAda
         holder.product_name.setText(products.get(position).getName());
         String special = products.get(position).getSpecial();
         Glide.with(context).load(products.get(position).getThumb()).into(holder.product_image);
+        SharedPreferences prefs = context.getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
+        api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
+        customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
+
 
         if(!products.get(position).getDescription().equalsIgnoreCase("..")) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -74,11 +79,9 @@ public class SubCategoriesAdapter  extends RecyclerView.Adapter<SubCategoriesAda
             public void onClick(View v) {
                 if (isOpen) {
                     holder.wishlist_fav.setColorFilter(Color.parseColor("#FD0505"));
-                    if(products.get(position).getProductId()!=null){
+                    if(products.get(position).getProductId()!=null &&  !TextUtils.isEmpty(customer_id)){
                         presenter = new SubCategoriesPresenterImpl((ISubCategories.View) context, new SubCategoriesControllerImpl());
-                        SharedPreferences prefs = context.getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
-                        api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
-                        presenter.addWishList(products.get(position).getProductId(),api_token);
+                        presenter.addWishList(products.get(position).getProductId(),api_token,customer_id);
                         isOpen = false;
                     }
                 } else {
@@ -91,9 +94,10 @@ public class SubCategoriesAdapter  extends RecyclerView.Adapter<SubCategoriesAda
         holder.addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter = new SubCategoriesPresenterImpl((ISubCategories.View) context, new SubCategoriesControllerImpl());
-                presenter.addToCart(products.get(position).getProductId(),api_token);
-
+                if (!TextUtils.isEmpty(api_token) &&  !TextUtils.isEmpty(customer_id)) {
+                    presenter = new SubCategoriesPresenterImpl((ISubCategories.View) context, new SubCategoriesControllerImpl());
+                    presenter.addToCart(products.get(position).getProductId(), api_token,customer_id);
+                }
             }
         });
 

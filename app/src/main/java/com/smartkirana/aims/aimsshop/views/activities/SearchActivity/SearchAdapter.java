@@ -30,7 +30,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RecyclerVi
     SearchPresenterImpl presenter;
     private OnItemClickListener mListener;
     boolean isOpen = false;
-    String api_token;
+    String api_token,customer_id;
 
     public interface OnItemClickListener {
         void onItemClick(int position, View itemView);
@@ -60,6 +60,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RecyclerVi
 
 
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
+        customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
 
         holder.product_name.setText(featureds.get(position).getName());
         String special = featureds.get(position).getSpecial();
@@ -71,7 +72,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RecyclerVi
                 if (isOpen) {
                     holder.wishlist_fav.setColorFilter(Color.parseColor("#FD0505"));
                     if (featureds.get(position).getProductId() != null) {
-                        presenter.addWishList(product_id, api_token);
+                        presenter.addWishList(product_id, api_token,customer_id);
                         isOpen = false;
                     }
                 } else {
@@ -83,8 +84,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RecyclerVi
         holder.addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id)) {
-                    presenter.addToCart(product_id, api_token);
+                if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id)&& !TextUtils.isEmpty(customer_id)) {
+                    presenter.addToCart(product_id, api_token,customer_id);
                 } else {
 
                 }

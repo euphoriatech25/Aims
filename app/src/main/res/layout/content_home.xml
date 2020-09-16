@@ -39,17 +39,17 @@
                         android:id="@+id/categoriesList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+                    <FrameLayout
+                        android:id="@+id/categoriesDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                     <FrameLayout
                         android:id="@+id/featureList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <FrameLayout
-                        android:id="@+id/categoriesDetails"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                       </LinearLayout>
             </ScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>

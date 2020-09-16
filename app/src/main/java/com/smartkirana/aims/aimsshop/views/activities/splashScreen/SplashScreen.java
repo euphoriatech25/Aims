@@ -1,8 +1,14 @@
 package com.smartkirana.aims.aimsshop.views.activities.splashScreen;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -12,8 +18,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smartkirana.aims.aimsshop.R;
+import com.smartkirana.aims.aimsshop.utils.AppUtils;
 import com.smartkirana.aims.aimsshop.views.activities.Home.HomeActivity;
 import com.smartkirana.aims.aimsshop.views.activities.base.BaseActivity;
+
+import java.util.Objects;
 
 public class SplashScreen extends BaseActivity {
 
@@ -42,9 +51,28 @@ public class SplashScreen extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent homeIntent = new Intent(SplashScreen.this, HomeActivity.class);
-                startActivity(homeIntent);
-                finish();
+                if (isNetworkAvailable()) {
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                } else {
+                    new AlertDialog.Builder(SplashScreen.this)
+                            .setIcon(R.drawable.error)
+                            .setTitle(R.string.Error)
+                            .setMessage(R.string.noInternet)
+                            .setPositiveButton(R.string.tryAgn, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = getIntent();
+                                    finish();
+                                    startActivity(intent);
+                                    //SplashScreenActivity.this.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                                }
+                            }).setNeutralButton(R.string.setting, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivityForResult(new Intent(Settings.ACTION_WIRELESS_SETTINGS),1);
+                        }
+                    }).show();
+                }
             }
 
         }, SPLASH_TIME_OUT);
@@ -52,5 +80,10 @@ public class SplashScreen extends BaseActivity {
 
     @Override
     public void showProgressBar(boolean showpBar) {
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = Objects.requireNonNull(cm).getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

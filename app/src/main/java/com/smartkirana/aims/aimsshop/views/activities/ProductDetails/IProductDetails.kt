@@ -16,16 +16,16 @@ internal interface IProductDetails {
     }
 
     interface Presenter : BasePresenter {
-        fun addToCart(product_id: String, api_token: String)
+        fun addToCart(product_id: String,customer_id: String, api_token: String)
         fun getProductList(productId: String)
-        fun addWishList(product_id: String, api_token: String)
+        fun addWishList(product_id: String,customer_id: String, api_token: String)
     }
 
 
     interface Controller {
         fun getProductList(route :String, product_id:String,  listener: OnFinishListener )
-        fun addToCart(route: String, api_token: String, product_id: String, listener: IProductDetails.OnFinishListener)
-        fun addWishList(route: String, api_token: String,product_id: String,listener: IProductDetails.OnFinishListener)
+        fun addToCart(route: String, api_token: String, customer_id: String, product_id: String, listener: IProductDetails.OnFinishListener)
+        fun addWishList(route: String, api_token: String,customer_id: String,product_id: String,listener: IProductDetails.OnFinishListener)
 
     }
 

@@ -18,16 +18,16 @@ internal interface ISubCategories {
 
     interface Presenter : BasePresenter {
         fun getSubCategoriesList(path: String)
-        fun addToCart(product_id: String,api_token: String)
-        fun addWishList(product_id: String,api_token: String)
+        fun addToCart(product_id: String,customer_id: String,api_token: String)
+        fun addWishList(product_id: String,customer_id: String,api_token: String)
     }
 
 
     interface Controller {
         fun getProductList(route :String, path:String,  listener: ISubCategories.OnFinishListener) {
         }
-        fun addToCart(route: String, api_token: String, product_id: String, listener: ISubCategories.OnFinishListener)
-        fun addWishList(product_id: String,api_token: String, route: String, listener: ISubCategories.OnFinishListener)
+        fun addToCart(route: String, api_token: String, product_id: String,customer_id: String,listener: ISubCategories.OnFinishListener)
+        fun addWishList(product_id: String,customer_id: String,api_token: String, route: String, listener: ISubCategories.OnFinishListener)
     }
 
     interface OnFinishListener : BaseResponse {

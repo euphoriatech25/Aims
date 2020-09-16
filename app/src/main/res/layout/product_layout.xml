@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
+    app:cardElevation="5dp"
+    app:contentPadding="2dp"
     app:cardCornerRadius="5dp">
 
     <LinearLayout
@@ -31,12 +33,24 @@
                 android:id="@+id/favorite"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:visibility="gone"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/dp10"
                 android:layout_marginEnd="@dimen/dp10"
                 android:src="@drawable/fav_product" />
-
+            <TextView
+                android:id="@+id/itemCardPromotion"
+                android:padding="@dimen/dp5"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/home_product_image"
+                android:background="@drawable/discount"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +65,7 @@
                 android:singleLine="true"
                 android:textStyle="bold"
                 android:textColor="@color/blue"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/product_description"

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/payment_method_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/payment_method_layout"
     android:layout_width="match_parent"
-    android:visibility="gone"
+    android:orientation="vertical"
     android:layout_height="wrap_content">
 
     <RadioGroup
@@ -16,17 +15,41 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/online_payment" />
+
+        <RadioButton
             android:id="@+id/radioMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="@string/cash_on_delivery" />
 
-        <RadioButton
-            android:id="@+id/radioFemale"
+    </RadioGroup>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="Add Comments About Your Order" />
+    <EditText
+        android:layout_width="match_parent"
+        android:background="@drawable/edit_box"
+        android:layout_height="80dp"
+        android:layout_margin="12dp" />
+    <LinearLayout
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/dp10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/online_payment" />
-
-    </RadioGroup>
+            android:text="@string/terms_conditions"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>

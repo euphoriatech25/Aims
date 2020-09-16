@@ -16,9 +16,9 @@ import retrofit2.Response;
 public class CartControllerImpl implements ICart.Controller {
 
     @Override
-    public void editProductList(@NotNull String route, @NotNull String api_token, @NotNull String key, @NotNull String quantity, @Nullable ICart.OnFinishListener listener) {
+    public void editProductList(@NotNull String route, @NotNull String api_token, @NotNull String key, @NotNull String customer_id, @NotNull String quantity, @Nullable ICart.OnFinishListener listener) {
         RetrofitInterface retrofitInterface = ServiceConfig.createService(RetrofitInterface.class);
-        Call<ResponseBody> call = retrofitInterface.editAddToCart(route, api_token, key, quantity);
+        Call<ResponseBody> call = retrofitInterface.editAddToCart(route, api_token, key, quantity,customer_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -47,9 +47,9 @@ public class CartControllerImpl implements ICart.Controller {
     }
 
     @Override
-    public void removeCartProduct(@NotNull String route, @NotNull String api_token, @NotNull String product_id, @Nullable ICart.OnFinishListener listener) {
+    public void removeCartProduct(@NotNull String route, @NotNull String api_token, @NotNull String product_id,@NotNull String customer_id, @Nullable ICart.OnFinishListener listener) {
         RetrofitInterface retrofitInterface = ServiceConfig.createService(RetrofitInterface.class);
-        Call<ResponseBody> call = retrofitInterface.removeAddToCart(route, api_token, product_id);
+        Call<ResponseBody> call = retrofitInterface.removeAddToCart(route, api_token, product_id,customer_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -78,9 +78,9 @@ public class CartControllerImpl implements ICart.Controller {
     }
 
     @Override
-    public void getCartProductList(@NotNull String route, @NotNull String api_token, @Nullable ICart.OnFinishListener listener) {
+    public void getCartProductList(@NotNull String route, @NotNull String api_token, @NotNull String customer_id, @Nullable ICart.OnFinishListener listener) {
         RetrofitInterface retrofitInterface = ServiceConfig.createService(RetrofitInterface.class);
-        Call<CartModel> call = retrofitInterface.getAddToCart(route, api_token);
+        Call<CartModel> call = retrofitInterface.getAddToCart(route, api_token,customer_id);
         call.enqueue(new Callback<CartModel>() {
             @Override
             public void onResponse(Call<CartModel> call, Response<CartModel> response) {

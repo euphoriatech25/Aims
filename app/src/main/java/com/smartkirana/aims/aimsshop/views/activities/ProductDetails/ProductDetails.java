@@ -47,7 +47,7 @@ public class ProductDetails extends BaseActivity implements IProductDetails.View
     private RecentProductAdapter recentProductAdapter;
     CardView card_related_products, product_description_card;
     List<ProductDetailsModel.RelatedProduct> relatedProducts;
-    private String api_token;
+    private String api_token,customer_id;
     private Button addToCart;
     private ImageButton fav_button, compare_product;
     private View view;
@@ -84,6 +84,7 @@ public class ProductDetails extends BaseActivity implements IProductDetails.View
 
         SharedPreferences prefs = getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
+        customer_id= prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
         addToCart.setOnClickListener(this);
         fav_button.setOnClickListener(this);
         compare_product.setOnClickListener(this);
@@ -184,25 +185,25 @@ public class ProductDetails extends BaseActivity implements IProductDetails.View
 
     @Override
     public void onSuccessAddToCart(@Nullable String message) {
-        Toast.makeText(this, "Successfully Added to Cart", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addToCart:
-                if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id)) {
-                    presenter.addToCart(product_id, api_token);
+                if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id)&& !TextUtils.isEmpty(customer_id)) {
+                    presenter.addToCart(product_id,customer_id, api_token);
                 } else {
                     Toast.makeText(this, "Please login First", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.favorite:
-                if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id)) {
+                if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id) && !TextUtils.isEmpty(customer_id)) {
                     if (isOpen) {
                         fav_button.setColorFilter(Color.parseColor("#FD0505"));
-                        presenter.addWishList(product_id, api_token);
+                        presenter.addWishList(product_id, api_token,customer_id);
                         isOpen = false;
 
                     } else {

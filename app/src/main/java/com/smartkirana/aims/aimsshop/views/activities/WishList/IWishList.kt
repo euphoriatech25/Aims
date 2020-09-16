@@ -17,16 +17,16 @@ internal interface IWishList {
     }
 
     interface Presenter : BasePresenter {
-        fun getWishList(api_token:String)
-        fun removeWishList(api_token: String,product_id:String)
-        fun addToCart(api_token: String,product_id:String)
+        fun getWishList(api_token:String,customer_id:String)
+        fun removeWishList(api_token: String,product_id:String,customer_id:String)
+        fun addToCart(api_token: String,product_id:String,customer_id:String)
     }
 
 
     interface Controller {
-        fun getWishList(route: String, api_token:String, listener: IWishList.OnFinishListener)
-        fun removeWishList(route: String, api_token: String,product_id:String, listener: IWishList.OnFinishListener)
-        fun addToCart(route: String,api_token: String,product_id:String,listener: IWishList.OnFinishListener)
+        fun getWishList(route: String, api_token:String ,customer_id:String ,listener: IWishList.OnFinishListener)
+        fun removeWishList(route: String, api_token: String,product_id:String,customer_id:String, listener: IWishList.OnFinishListener)
+        fun addToCart(route: String,api_token: String,product_id:String,customer_id:String,listener: IWishList.OnFinishListener)
     }
 
     interface OnFinishListener : BaseResponse {

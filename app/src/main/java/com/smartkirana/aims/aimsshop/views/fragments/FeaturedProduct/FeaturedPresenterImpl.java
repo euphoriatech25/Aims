@@ -88,9 +88,9 @@ public class FeaturedPresenterImpl implements IFeature.Presenter, IFeature.OnFin
     }
 
     @Override
-    public void addToCart(@NotNull String product_id,@NotNull String api_token) {
-        if(product_id!=null&&api_token!=null) {
-            controller.addToCart(EndPoints.ADD_TO_CART, api_token, product_id, this);
+    public void addToCart(@NotNull String product_id,@NotNull String customer_id,@NotNull String api_token) {
+        if(product_id!=null&&api_token!=null&&customer_id!=null) {
+            controller.addToCart(EndPoints.ADD_TO_CART, api_token, product_id, customer_id,this);
         }else {
 
         }
@@ -122,7 +122,7 @@ public class FeaturedPresenterImpl implements IFeature.Presenter, IFeature.OnFin
     }
 
     @Override
-    public void addWishList(@NotNull String product_id, @NotNull String api_token) {
-        controller.addWishList( product_id, api_token, EndPoints.WISHLIST_ADD,this);
+    public void addWishList(@NotNull String product_id, @NotNull String api_token,@NotNull String customer_id) {
+        controller.addWishList( product_id,customer_id, api_token, EndPoints.WISHLIST_ADD,this);
     }
 }

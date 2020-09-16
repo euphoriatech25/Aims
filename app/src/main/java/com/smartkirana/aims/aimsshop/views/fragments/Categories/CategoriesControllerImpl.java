@@ -18,8 +18,7 @@ public class CategoriesControllerImpl implements ICategories.Controller {
         call.enqueue(new Callback<CategoriesModel>() {
             @Override
             public void onResponse(Call<CategoriesModel> call, Response<CategoriesModel> response) {
-                if (response.isSuccessful()) {
-                    if (response.isSuccessful()) {
+                     if (response.isSuccessful()) {
                         if(response.body()!=null) {
                             CategoriesModel featuredModel = response.body();
                             listener.onSuccess(featuredModel);
@@ -30,7 +29,7 @@ public class CategoriesControllerImpl implements ICategories.Controller {
                         listener.unKnownError();
                     }
 
-                }
+
             }
 
             @Override

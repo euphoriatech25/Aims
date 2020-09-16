@@ -40,10 +40,10 @@ public class ProductDetailsControllerImpl implements IProductDetails.Controller 
     }
 
     @Override
-    public void addToCart(@NotNull String route, @NotNull String api_token, @NotNull String product_id, @NotNull IProductDetails.OnFinishListener listener) {
+    public void addToCart(@NotNull String route, @NotNull String api_token,@NotNull String cusmoter_id, @NotNull String product_id, @NotNull IProductDetails.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
 
-        Call<ResponseBody> call = post.addAddToCart(route,api_token,product_id);
+        Call<ResponseBody> call = post.addAddToCart(route,api_token,product_id,cusmoter_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -71,10 +71,9 @@ public class ProductDetailsControllerImpl implements IProductDetails.Controller 
     }
 
     @Override
-    public void addWishList(@NotNull String route, @NotNull String api_token, @NotNull String product_id, @NotNull IProductDetails.OnFinishListener listener) {
+    public void addWishList(@NotNull String route, @NotNull String api_token,@NotNull String cusmoter_id, @NotNull String product_id, @NotNull IProductDetails.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
-        Log.d("DIDIDIDDIDDIDIID",product_id+"  "+api_token+"   "+route);
-        Call<ResponseBody> call = post.addWishList(route,api_token,product_id);
+        Call<ResponseBody> call = post.addWishList(route,api_token,product_id,cusmoter_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -35,19 +35,17 @@ public class SubCategoriesControllerImpl implements ISubCategories.Controller {
             }
         });
     }
-    @Override
-    public void addToCart(@NotNull String route, @NotNull String api_token, @NotNull String product_id, @NotNull ISubCategories.OnFinishListener listener) {
-        RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
 
-        Call<ResponseBody> call = post.addAddToCart(route,api_token,product_id);
+    @Override
+    public void addToCart(@NotNull String route, @NotNull String api_token, @NotNull String product_id,@NotNull String customer_id, @NotNull ISubCategories.OnFinishListener listener) {
+        RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
+        Call<ResponseBody> call = post.addAddToCart(route,api_token,product_id,customer_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     listener.onSuccessAddToCart(response.message());
-
                     if(response.body()!=null) {
-
                         listener.onSuccessAddToCart(response.message());
                     }else {
                         listener.onNoData();
@@ -69,9 +67,9 @@ public class SubCategoriesControllerImpl implements ISubCategories.Controller {
     }
 
     @Override
-    public void addWishList(@NotNull String product_id, @NotNull String api_token, @NotNull String route, @NotNull ISubCategories.OnFinishListener listener) {
+    public void addWishList(@NotNull String product_id,@NotNull String customer_id, @NotNull String api_token, @NotNull String route, @NotNull ISubCategories.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
-        Call<ResponseBody> call = post.addWishList(route,api_token,product_id);
+        Call<ResponseBody> call = post.addWishList(route,api_token,product_id,customer_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

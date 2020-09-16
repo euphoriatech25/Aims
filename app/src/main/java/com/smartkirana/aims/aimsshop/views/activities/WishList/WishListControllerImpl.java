@@ -15,9 +15,9 @@ import retrofit2.Response;
 public class WishListControllerImpl implements IWishList.Controller {
 
     @Override
-    public void getWishList(@NotNull String route, @NotNull String api_token, @NotNull IWishList.OnFinishListener listener) {
+    public void getWishList(@NotNull String route, @NotNull String api_token, @NotNull String customer_id,@NotNull IWishList.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
-        Call<WishListModel> call = post.getWishList(route, api_token);
+        Call<WishListModel> call = post.getWishList(route, api_token,customer_id);
         call.enqueue(new Callback<WishListModel>() {
             @Override
             public void onResponse(Call<WishListModel> call, Response<WishListModel> response) {
@@ -38,9 +38,9 @@ public class WishListControllerImpl implements IWishList.Controller {
     }
 
     @Override
-    public void removeWishList(@NotNull String route, @NotNull String api_token, @NotNull String product_id, @NotNull IWishList.OnFinishListener listener) {
+    public void removeWishList(@NotNull String route, @NotNull String api_token, @NotNull String product_id, @NotNull String customer_id, @NotNull IWishList.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
-        Call<ResponseBody> call = post.removeWishList(route, api_token, product_id);
+        Call<ResponseBody> call = post.removeWishList(route, api_token, product_id,customer_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -59,10 +59,10 @@ public class WishListControllerImpl implements IWishList.Controller {
     }
 
     @Override
-    public void addToCart(@NotNull String route, @NotNull String api_token, @NotNull String product_id, @NotNull IWishList.OnFinishListener listener) {
+    public void addToCart(@NotNull String route, @NotNull String api_token, @NotNull String product_id,@NotNull String customer_id, @NotNull IWishList.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
 
-        Call<ResponseBody> call = post.addAddToCart(route,api_token,product_id);
+        Call<ResponseBody> call = post.addAddToCart(route,api_token,product_id,customer_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

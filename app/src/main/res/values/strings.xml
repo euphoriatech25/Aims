@@ -43,7 +43,7 @@
     <string name="address2">Address 2</string>
     <string name="city">City</string>
     <string name="cash_on_delivery">Cash On Delivery</string>
-    <string name="online_payment">Online Payment</string>
+    <string name="online_payment">Cellpay Payment Getway</string>
     <string name="already_have_address">I want to use an existing address</string>
     <string name="new_address">I want to use a new address</string>
     <string name="continue_shopping"><font size="14">Continue\nShopping</font></string>
@@ -74,5 +74,9 @@
     <string name="aims_longitude">85.369334</string>
 
 
-
+    <string name="Error">Error</string>
+    <string name="noInternet">No internet connection</string>
+    <string name="tryAgn">TRY AGAIN</string>
+    <string name="setting">Setting</string>
+    <string name="terms_conditions"><![CDATA[I have read and agree to the Terms & Conditions]]></string>
 </resources>

@@ -5,6 +5,9 @@ internal class PrefConstants {
         const val API_TOKEN ="api_token"
         const val USER_DETAILS_PREF ="user_details_pref"
         const val DEFAULT_VALUE ="No Api Token Found"
+        const val CUSTOMER_ID ="customer_id"
+        const val CUSTOMER_NAME ="fullname"
+
 
 
     }

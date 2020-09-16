@@ -3,6 +3,7 @@ package com.smartkirana.aims.aimsshop.views.activities.Login;
 import android.text.TextUtils;
 
 import com.smartkirana.aims.aimsshop.utils.AppUtils;
+import com.smartkirana.aims.aimsshop.utils.Constants;
 import com.smartkirana.aims.aimsshop.views.activities.Register.CreateAccountModel;
 import com.workerswallet.views.activities.login.ILogin;
 
@@ -63,6 +64,8 @@ public class LoginPresenterImpl implements ILogin.Presenter, ILogin.OnFinishList
         if (view != null) {
             String email = view.getEmail();
             String password = view.getPassword();
+            String username = Constants.UserNameValue;
+            String key=Constants.KeyValue;
             String term = "1";
 
             boolean hasError = false;
@@ -87,6 +90,8 @@ public class LoginPresenterImpl implements ILogin.Presenter, ILogin.OnFinishList
                 CreateAccountModel model = new CreateAccountModel();
                 model.setEmail(email);
                 model.setPassword(password);
+                model.setUsername(username);
+                model.setKey(key);
                 model.setTerm(term);
                 controller.loginUser(model,this);
             }

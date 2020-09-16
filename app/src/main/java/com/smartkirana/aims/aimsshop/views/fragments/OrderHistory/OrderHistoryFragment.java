@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smartkirana.aims.aimsshop.R;
 import com.smartkirana.aims.aimsshop.utils.PrefConstants;
@@ -23,7 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class OrderHistoryFragment extends BaseFragment implements IOrderHistory.View, View.OnClickListener {
     OrderHistoryPresenterImpl presenter;
     String api_token;
-    ImageButton viewOrderDetail;
+    ImageButton viewOrderDetail,viewOrderLocation;
     private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
 //    LinearLayout orderHistory;
     OrderHistoryModel.Order orderHistoryDetails;
@@ -39,14 +40,20 @@ public class OrderHistoryFragment extends BaseFragment implements IOrderHistory.
         presenter = new OrderHistoryPresenterImpl(this, new OrderHistoryControllerImpl());
         presenter.getOrderHistory(api_token, "1");
         viewOrderDetail = view.findViewById(R.id.viewOrderDetail);
-
+        viewOrderLocation=view.findViewById(R.id.viewOrderLocation);
         cart_id = view.findViewById(R.id.cart_id);
         customer_name = view.findViewById(R.id.customer_name);
         no_of_products = view.findViewById(R.id.no_of_products);
         status = view.findViewById(R.id.status);
         total_price = view.findViewById(R.id.total_price);
         product_date_added = view.findViewById(R.id.product_date_added);
-        getOrderHistoryInfo();
+        viewOrderLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startActivity(new Intent(getContext(), DeliveryLocationActivity.class));
+
+            }
+        });
         return view;
     }
 
@@ -66,7 +73,6 @@ public class OrderHistoryFragment extends BaseFragment implements IOrderHistory.
         viewOrderDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getOrderHistoryInfo();
 
             }
         });
@@ -121,6 +127,11 @@ public class OrderHistoryFragment extends BaseFragment implements IOrderHistory.
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.viewOrderLocation:
+                Toast.makeText(getContext(), "123456789", Toast.LENGTH_SHORT).show();
 
+                break;
+        }
     }
 }

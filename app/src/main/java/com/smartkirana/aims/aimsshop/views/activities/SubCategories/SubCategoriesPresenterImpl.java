@@ -86,11 +86,11 @@ public class SubCategoriesPresenterImpl implements ISubCategories.Presenter, ISu
 
 
     @Override
-    public void addWishList(@NotNull String product_id, @NotNull String api_token) {
+    public void addWishList(@NotNull String product_id, @NotNull String customer_id, @NotNull String api_token) {
         if (view != null) {
 //            if (AppUtils.isNetworkAvailable()) {
             view.showProgressBar(true);
-            controller.addToCart(EndPoints.WISHLIST_ADD,api_token, product_id,this);
+            controller.addWishList( product_id,customer_id,api_token,EndPoints.WISHLIST_ADD,this);
 //            } else {
 //                view.noInternetConnection();
 //            }
@@ -108,11 +108,11 @@ public class SubCategoriesPresenterImpl implements ISubCategories.Presenter, ISu
     }
 
     @Override
-    public void addToCart(@NotNull String product_id, @NotNull String api_token) {
+    public void addToCart(@NotNull String product_id, @NotNull String api_token,@NotNull String customer_id) {
         if (view != null) {
 //            if (AppUtils.isNetworkAvailable()) {
             view.showProgressBar(true);
-            controller.addToCart(EndPoints.ADD_TO_CART,api_token, product_id,this);
+            controller.addToCart(EndPoints.ADD_TO_CART,api_token, product_id,customer_id,this);
 //            } else {
 //                view.noInternetConnection();
 //            }
