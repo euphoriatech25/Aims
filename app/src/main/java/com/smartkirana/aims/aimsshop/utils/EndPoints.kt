@@ -2,8 +2,8 @@ package com.smartkirana.aims.aimsshop.utils
 
 class EndPoints {
     companion object {
-                const val BASE_URL ="http://www.aimsshop.net/";
-//        const val BASE_URL = "http://192.168.100.105:8080/opencart/"
+//                const val BASE_URL ="http://www.aimsshop.net/";
+        const val BASE_URL = "http://192.168.100.105:8080/opencart/"
         const val API = "index.php?"
         const val PRODUCTLIST = API + "product";
         const val CART_PRODUCTS = "api/cart/products"

@@ -327,3 +327,40 @@
 //        Log.d("Latitude", "status");
 //    }
 //}
+
+
+
+
+
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//        CameraUpdate center=
+//                CameraUpdateFactory.newLatLng(new LatLng(27.700769,
+//                        85.300140));
+//        CameraUpdate zoom= CameraUpdateFactory.zoomTo(15);
+//        mMap.moveCamera(center);
+//        mMap.animateCamera(zoom);
+//
+//        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//            @Override
+//            public void onMapClick(LatLng latLng) {
+//
+//                if (isOpen) {
+//                    mMap.addMarker(new MarkerOptions().position(latLng).title("My Location"));
+//                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//                    Toast.makeText(
+//                            CheckoutActivity.this,
+//                            "Lat : " + latLng.latitude + " , "
+//                                    + "Long : " + latLng.longitude,
+//                            Toast.LENGTH_LONG).show();
+//                    isOpen = false;
+//
+//                } else {
+//                    googleMap.clear();
+//                    isOpen = true;
+//                }
+//
+//            }
+//        });
+//    }

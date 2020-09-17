@@ -29,7 +29,6 @@ import com.smartkirana.aims.aimsshop.R;
 import com.smartkirana.aims.aimsshop.utils.AppUtils;
 import com.smartkirana.aims.aimsshop.utils.Constants;
 import com.smartkirana.aims.aimsshop.views.activities.Cart.CartActivity;
-import com.smartkirana.aims.aimsshop.views.activities.CheckOut.CheckoutActivity;
 import com.smartkirana.aims.aimsshop.views.activities.SearchActivity.SearchProductActivity;
 import com.smartkirana.aims.aimsshop.views.activities.SubCategories.SubCategories;
 import com.smartkirana.aims.aimsshop.views.activities.WishList.WishListActivity;
@@ -126,7 +125,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (id == R.id.action_cart) {
-            startActivity(new Intent(HomeActivity.this, CheckoutActivity.class));
+            startActivity(new Intent(HomeActivity.this, CartActivity.class));
             finish();
             return true;
         }

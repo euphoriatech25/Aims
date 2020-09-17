@@ -13,18 +13,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.smartkirana.aims.aimsshop.R;
 import com.smartkirana.aims.aimsshop.views.activities.Cart.CartActivity;
 import com.smartkirana.aims.aimsshop.views.activities.base.BaseActivity;
 import com.smartkirana.aims.aimsshop.views.fragments.PaymentOption.PaymentMethod;
 import com.smartkirana.aims.aimsshop.views.fragments.billingAddress.BillingAddressFragment;
 
-public class CheckoutActivity extends BaseActivity implements View.OnClickListener {
+public class CheckoutActivity extends BaseActivity implements View.OnClickListener{
 //        , OnMapReadyCallback {
 
     LinearLayout billing_details, sub_billinglayout, delivery_details, new_address_layout, payment_method, payment_method_layout;
     boolean isOpen = false;
-
+    private GoogleMap mMap;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,15 @@ public class CheckoutActivity extends BaseActivity implements View.OnClickListen
         billing_details.setOnClickListener(this);
         payment_method.setOnClickListener(this);
         delivery_details.setOnClickListener(this);
+
+
+
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
+
+
+
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = new BillingAddressFragment();
@@ -114,29 +124,4 @@ public class CheckoutActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        mMap = googleMap;
-//        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//            @Override
-//            public void onMapClick(LatLng latLng) {
-//
-//                if (isOpen) {
-//                    mMap.addMarker(new MarkerOptions().position(latLng).title("My Location"));
-//                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//                    Toast.makeText(
-//                            CheckoutActivity.this,
-//                            "Lat : " + latLng.latitude + " , "
-//                                    + "Long : " + latLng.longitude,
-//                            Toast.LENGTH_LONG).show();
-//                    isOpen = false;
-//
-//                } else {
-//                    googleMap.clear();
-//                    isOpen = true;
-//                }
-//
-//            }
-//        });
-//    }
 }

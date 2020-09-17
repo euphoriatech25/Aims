@@ -231,11 +231,6 @@
                     android:background="@drawable/border_spinner"
                     android:spinnerMode="dropdown" />
             </com.google.android.material.textfield.TextInputLayout>
-      <Button
-          android:id="@+id/locationMark"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-
         </LinearLayout>
 
         <Button

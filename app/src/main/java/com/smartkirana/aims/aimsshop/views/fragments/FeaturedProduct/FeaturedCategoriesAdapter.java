@@ -64,6 +64,7 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
 
         holder.product_name.setText(featureds.get(position).getName());
         String special = featureds.get(position).getSpecial();
+
         Glide.with(context).load(featureds.get(position).getThumb()).into(holder.product_image);
         if(!featureds.get(position).getDescription().equalsIgnoreCase("..")) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

@@ -29,7 +29,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class BillingAddressFragment extends BaseFragment implements IBillingAddress.View, View.OnClickListener, OnMapReadyCallback {
+public class BillingAddressFragment extends BaseFragment implements IBillingAddress.View, View.OnClickListener{
     View view;
     boolean isOpen = false;
     EditText firstName, lastName, companyName, address1, address2, city, postCode;
@@ -227,38 +227,8 @@ public class BillingAddressFragment extends BaseFragment implements IBillingAddr
                 adapter.setDropDownViewResource(R.layout.spinner_items);
                 spinnerState.setAdapter(adapter);
             }
-
         }
-
-
     }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-//        mMap = googleMap;
-//        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//            @Override
-//            public void onMapClick(LatLng latLng) {
-//
-//                if (isOpen) {
-//                    mMap.addMarker(new MarkerOptions().position(latLng).title("My Location"));
-//                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//                    Toast.makeText(
-//                            getContext(),
-//                            "Lat : " + latLng.latitude + " , "
-//                                    + "Long : " + latLng.longitude,
-//                            Toast.LENGTH_LONG).show();
-//                    isOpen = false;
-//
-//                } else {
-//                    googleMap.clear();
-//                    isOpen = true;
-//                }
-//
-//            }
-//        });
-    }
-
     @Override
     public void onSuccessAvailableAddress(@NotNull AvailableModel availableModel) {
         if (availableModel != null) {

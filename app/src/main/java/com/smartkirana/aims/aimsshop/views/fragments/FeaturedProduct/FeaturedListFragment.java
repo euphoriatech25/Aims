@@ -1,19 +1,24 @@
 package com.smartkirana.aims.aimsshop.views.fragments.FeaturedProduct;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.smartkirana.aims.aimsshop.R;
 import com.smartkirana.aims.aimsshop.utils.AppUtils;
 import com.smartkirana.aims.aimsshop.utils.Constants;
+import com.smartkirana.aims.aimsshop.views.activities.Cart.CartActivity;
 import com.smartkirana.aims.aimsshop.views.activities.ProductDetails.ProductDetails;
+import com.smartkirana.aims.aimsshop.views.activities.WishList.WishListActivity;
 import com.smartkirana.aims.aimsshop.views.activities.base.BaseFragment;
 
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +33,7 @@ public class FeaturedListFragment extends BaseFragment implements IFeature.View,
     RecyclerView recyclerviewFeature;
     FeaturedCategoriesAdapter featuredCategoriesAdapter;
     List<HomeFeaturedModel.Featured> homeFeatured;
-
+    LinearLayout linear;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class FeaturedListFragment extends BaseFragment implements IFeature.View,
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View viewItem = inflater.inflate(R.layout.fragment_product_list, parent, false);
         recyclerviewFeature = viewItem.findViewById(R.id.recyclerviewFeature);
+        linear=viewItem.findViewById(R.id.linear);
         layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerviewFeature.setLayoutManager(layoutManager);
         recyclerviewFeature.setHasFixedSize(true);
@@ -97,9 +103,20 @@ public class FeaturedListFragment extends BaseFragment implements IFeature.View,
 
     @Override
     public void onSuccessAddToCart(@Nullable String message) {
-
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar
+                .make(linear, "Added to Cart !!!", Snackbar.LENGTH_LONG);
+        snackbar.setAction("View Cart", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), CartActivity.class));
+            }
+        });
+        snackbar.setTextColor(Color.WHITE);
+        snackbar.setBackgroundTint(Color.BLACK);
+        snackbar.setActionTextColor(Color.parseColor("#008000"));
+        snackbar.show();
     }
+
 
     @Override
     public void showProgressBar(boolean showpBar) {
@@ -113,6 +130,19 @@ public class FeaturedListFragment extends BaseFragment implements IFeature.View,
 
     @Override
     public void onSuccessAWishList(@Nullable String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+         Snackbar snackbar = Snackbar
+                .make(linear, "Added to WishList !!!", Snackbar.LENGTH_LONG);
+        snackbar.setAction("View Wishlist", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), WishListActivity.class));
+
+            }
+        });
+        snackbar.setTextColor(Color.WHITE);
+        snackbar.setBackgroundTint(Color.BLACK);
+        snackbar.setActionTextColor(Color.parseColor("#008000"));
+        snackbar.show();
     }
 }
+

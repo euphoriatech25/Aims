@@ -2,7 +2,10 @@ package com.smartkirana.aims.aimsshop.views.activities.Cart;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,19 +13,18 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.smartkirana.aims.aimsshop.Conn;
 import com.smartkirana.aims.aimsshop.R;
 import com.smartkirana.aims.aimsshop.utils.AppUtils;
@@ -31,7 +33,6 @@ import com.smartkirana.aims.aimsshop.utils.PrefConstants;
 import com.smartkirana.aims.aimsshop.views.activities.CheckOut.CheckoutActivity;
 import com.smartkirana.aims.aimsshop.views.activities.Home.HomeActivity;
 import com.smartkirana.aims.aimsshop.views.activities.Login.LoginActivity;
-import com.smartkirana.aims.aimsshop.views.activities.ProductDetails.ProductDetails;
 import com.smartkirana.aims.aimsshop.views.activities.SearchActivity.SearchProductActivity;
 import com.smartkirana.aims.aimsshop.views.activities.WishList.WishListActivity;
 import com.smartkirana.aims.aimsshop.views.activities.base.BaseActivity;
@@ -39,26 +40,30 @@ import com.smartkirana.aims.aimsshop.views.activities.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartActivity extends BaseActivity implements ICart.View, View.OnClickListener {
-    LinearLayout linearLayout, linearlayoutTotal, ifEmpty;
+public class CartActivity extends BaseActivity implements ICart.View, View.OnClickListener, RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
+    LinearLayout  linearlayoutTotal, ifEmpty,cartLayout;
     ProgressBar progressBar;
     String name;
     private CartPresenterImpl presenter;
-    private String api_token,customer_id;
+    private String api_token, customer_id;
     private Button continue_shopping, checkout, continue_shopping_empty;
-    int productQuantity = 0;
     List<CartModel.Product> selectedProducts = new ArrayList<CartModel.Product>();
     boolean isOpen = false;
     private TextView totalDetails;
     private BottomNavigationView bottomNavigationView;
+    List<CartModel.Product>cartList;
+    RecyclerView cartRecycler;
+    CartListAdapter cartListAdapter;
+    private GridLayoutManager layoutManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         linearlayoutTotal = findViewById(R.id.linearlayoutTotal);
+        cartLayout = findViewById(R.id.cartLayout);
         progressBar = findViewById(R.id.progressBar);
-        linearLayout = findViewById(R.id.linearLayoutCart);
+        cartRecycler = findViewById(R.id.cartRecycler);
         continue_shopping = findViewById(R.id.continue_shopping);
         continue_shopping_empty = findViewById(R.id.continue_shopping_empty);
         checkout = findViewById(R.id.checkout);
@@ -71,9 +76,15 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
         customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
 
         presenter = new CartPresenterImpl(this, new CartControllerImpl());
-        presenter.getCartProductList(api_token,customer_id);
+        presenter.getCartProductList(api_token, customer_id);
         continue_shopping.setOnClickListener(this);
         checkout.setOnClickListener(this);
+
+        layoutManager = new GridLayoutManager(this, 1);
+        cartRecycler.setLayoutManager(layoutManager);
+        cartRecycler.setHasFixedSize(true);
+        cartRecycler.setFocusable(false);
+        cartRecycler.setAdapter(cartListAdapter);
         init();
     }
 
@@ -82,6 +93,7 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
         setUpToolbar("My Cart", true);
         AppUtils.freezeUi(this, true);
     }
+
     private void changeStatusBarColor() {
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -93,6 +105,11 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
     public void onSuccess(final CartModel cartModel) {
         AppUtils.freezeUi(this, false);
         List<CartModel.Total> totals = cartModel.getTotals();
+        cartList=cartModel.getProducts();
+        cartListAdapter = new CartListAdapter(this, cartList);
+        cartRecycler.setAdapter(cartListAdapter);
+
+
 
         for (int i = 0; i < totals.size(); i++) {
             View view = LayoutInflater.from(this).inflate(R.layout.cart_total, linearlayoutTotal, false);
@@ -103,95 +120,29 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
             linearlayoutTotal.addView(view);
         }
 
-        for (int i = 0; i < cartModel.getProducts().size(); i++) {
-            View view = LayoutInflater.from(this).inflate(R.layout.cart_items, linearLayout, false);
-            name = cartModel.getProducts().get(i).getName();
-            ImageView product_image = view.findViewById(R.id.product_image);
-            TextView product_name = view.findViewById(R.id.product_name);
-            TextView product_unit_price = view.findViewById(R.id.product_price);
-            TextView total_price = view.findViewById(R.id.total_price);
-            TextView product_avaibility = view.findViewById(R.id.product_avaibility);
-            ImageButton removeCart = view.findViewById(R.id.removeCart);
-            ImageButton quantity_update = view.findViewById(R.id.quantity_update);
-            ImageButton decrease_quantity = view.findViewById(R.id.decrease_quantity);
-            ImageButton increase_quantity = view.findViewById(R.id.increase_quantity);
-            TextView product_model = view.findViewById(R.id.product_model);
-            EditText product_quantity = view.findViewById(R.id.product_quantity);
-            String name = cartModel.getProducts().get(i).getName();
+        addSlidingAnimation();
 
-            CheckBox selectProduct = view.findViewById(R.id.selectProduct);
-            List<CartModel.Product> product = cartModel.getProducts();
-            int finalI = i;
+    }
 
-            selectProduct.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selectedProducts.add(product.get(finalI));
-                }
-            });
-
-//            Initialization of Value
-            product_name.setText(cartModel.getProducts().get(i).getName());
-            product_unit_price.setText(cartModel.getProducts().get(i).getPrice());
-            total_price.setText(cartModel.getProducts().get(i).getTotal());
-            product_model.setText(cartModel.getProducts().get(i).getModel());
-            if (cartModel.getProducts().get(i).getStock()) {
-                product_avaibility.setText("In Stock");
-            } else {
-                product_avaibility.setText("Not In Stock");
+    private void addSlidingAnimation() {
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(cartRecycler);
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback1 = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.UP) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
             }
-            Glide.with(this).load(cartModel.getProducts().get(i).getImage()).into(product_image);
-
-            String cart_id = cartModel.getProducts().get(i).getCartId();
-
-            removeCart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    presenter.removeCartProduct(cart_id,customer_id,api_token);
-                }
-            });
-
-            String product_id = cartModel.getProducts().get(i).getProductId();
-            product_name.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(CartActivity.this, ProductDetails.class);
-                    intent.putExtra(Constants.PRODUCT_NAME, name);
-                    intent.putExtra(Constants.PRODUCT_ID, product_id);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
-
-            product_quantity.setText(cartModel.getProducts().get(i).getQuantity());
-            increase_quantity.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    productQuantity = Integer.parseInt(product_quantity.getText().toString()) + 1;
-                    product_quantity.setText(String.valueOf(productQuantity));
-                }
-            });
-            decrease_quantity.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (productQuantity > 1) {
-                        productQuantity = Integer.parseInt(product_quantity.getText().toString()) - 1;
-                        product_quantity.setText(String.valueOf(productQuantity));
-                    }
-                }
-            });
-
-            quantity_update.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    presenter.editCartProduct(cart_id, product_quantity.getText().toString(),customer_id, api_token);
-                }
-            });
-
-            linearLayout.addView(view);
-
-        }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                // Row is swiped from recycler view
+                // remove it from adapter
+            }
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
+        new ItemTouchHelper(itemTouchHelperCallback1).attachToRecyclerView(cartRecycler);
     }
 
     @Override
@@ -294,6 +245,33 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
                 }
 
                 break;
+        }
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if (viewHolder instanceof CartListAdapter.MyViewHolder) {
+            String name = cartList.get(viewHolder.getAdapterPosition()).getName();
+
+             final CartModel.Product deletedItem = cartList.get(viewHolder.getAdapterPosition());
+            final int deletedIndex = viewHolder.getAdapterPosition();
+
+             cartListAdapter.removeItem(viewHolder.getAdapterPosition());
+            if (!TextUtils.isEmpty(api_token) &&  !TextUtils.isEmpty(customer_id)&&cartList!=null) {
+                presenter.removeCartProduct(customer_id,cartList.get(position).getCartId(), api_token);
+            }
+
+            Snackbar snackbar = Snackbar
+                    .make(cartLayout, name + " removed from cart!", Snackbar.LENGTH_LONG);
+            snackbar.setAction("UNDO", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+//                    cartListAdapter.restoreItem(deletedItem, deletedIndex);
+                }
+            });
+            snackbar.setActionTextColor(Color.YELLOW);
+            snackbar.show();
         }
     }
 }

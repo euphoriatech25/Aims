@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class WishListActivity extends BaseActivity implements IWishList.View {
     String api_token,customer_id;
     ProgressBar progressBar;
     private String product_id_public;
+    ScrollView wishlistLayout;
 
     @Override
     public void onBackPressed() {
@@ -58,7 +60,7 @@ public class WishListActivity extends BaseActivity implements IWishList.View {
         SharedPreferences prefs = getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
         customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
-
+        wishlistLayout=findViewById(R.id.wishlistLayout);
         presenter.getWishList(api_token,customer_id);
 
         changeStatusBarColor();
@@ -183,10 +185,10 @@ public class WishListActivity extends BaseActivity implements IWishList.View {
 
     @Override
     public void onRemoveWishListSuccess(@Nullable String message) {
+        Toast.makeText(this, "Successfully Removed from Wishlist", Toast.LENGTH_SHORT).show();
         Intent intent = getIntent();
         finish();
         startActivity(intent);
-        AppUtils.showToast(this, message);
     }
 
     @Override

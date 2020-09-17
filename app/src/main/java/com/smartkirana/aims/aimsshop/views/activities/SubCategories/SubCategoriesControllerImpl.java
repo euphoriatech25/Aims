@@ -67,7 +67,7 @@ public class SubCategoriesControllerImpl implements ISubCategories.Controller {
     }
 
     @Override
-    public void addWishList(@NotNull String product_id,@NotNull String customer_id, @NotNull String api_token, @NotNull String route, @NotNull ISubCategories.OnFinishListener listener) {
+    public void addWishList( @NotNull String route,@NotNull String api_token,@NotNull String product_id,@NotNull String customer_id, @NotNull ISubCategories.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
         Call<ResponseBody> call = post.addWishList(route,api_token,product_id,customer_id);
         call.enqueue(new Callback<ResponseBody>() {

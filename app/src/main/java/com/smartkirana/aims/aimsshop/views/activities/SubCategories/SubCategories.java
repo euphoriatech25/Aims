@@ -1,20 +1,25 @@
 package com.smartkirana.aims.aimsshop.views.activities.SubCategories;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.smartkirana.aims.aimsshop.R;
 import com.smartkirana.aims.aimsshop.utils.Constants;
+import com.smartkirana.aims.aimsshop.views.activities.Cart.CartActivity;
 import com.smartkirana.aims.aimsshop.views.activities.ProductDetails.ProductDetails;
+import com.smartkirana.aims.aimsshop.views.activities.WishList.WishListActivity;
 import com.smartkirana.aims.aimsshop.views.activities.base.BaseActivity;
 import com.smartkirana.aims.aimsshop.views.fragments.FeaturedProduct.FeaturedCategoriesAdapter;
 
@@ -33,6 +38,7 @@ public class SubCategories extends BaseActivity implements ISubCategories.View, 
     ImageView thumbnail_image;
     List<SubCategoriesModel.Product> product;
     View view;
+    ScrollView sub_billinglayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public class SubCategories extends BaseActivity implements ISubCategories.View, 
 
         product_path = findViewById(R.id.product_path);
         thumbnail_image = findViewById(R.id.thumbnail_image);
+        sub_billinglayout=findViewById(R.id.sub_billinglayout);
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.account));
@@ -113,11 +120,35 @@ public class SubCategories extends BaseActivity implements ISubCategories.View, 
 
     @Override
     public void onSuccessAddToCart(@Nullable String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar
+                .make(sub_billinglayout, "Added to Cart !!!", Snackbar.LENGTH_LONG);
+        snackbar.setAction("View Cart", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SubCategories.this, CartActivity.class));
+                finish();
+            }
+        });
+        snackbar.setTextColor(Color.WHITE);
+        snackbar.setBackgroundTint(Color.BLACK);
+        snackbar.setActionTextColor(Color.parseColor("#008000"));
+        snackbar.show();
     }
 
     @Override
     public void onSuccessWishList(@Nullable String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar
+                .make(sub_billinglayout, "Added to Wishlist !!!", Snackbar.LENGTH_LONG);
+        snackbar.setAction("View Wishlist", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SubCategories.this, WishListActivity.class));
+                finish();
+            }
+        });
+        snackbar.setTextColor(Color.WHITE);
+        snackbar.setBackgroundTint(Color.BLACK);
+        snackbar.setActionTextColor(Color.parseColor("#008000"));
+        snackbar.show();
     }
 }

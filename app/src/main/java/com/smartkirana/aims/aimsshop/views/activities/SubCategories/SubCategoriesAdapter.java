@@ -81,7 +81,7 @@ public class SubCategoriesAdapter  extends RecyclerView.Adapter<SubCategoriesAda
                     holder.wishlist_fav.setColorFilter(Color.parseColor("#FD0505"));
                     if(products.get(position).getProductId()!=null &&  !TextUtils.isEmpty(customer_id)){
                         presenter = new SubCategoriesPresenterImpl((ISubCategories.View) context, new SubCategoriesControllerImpl());
-                        presenter.addWishList(products.get(position).getProductId(),api_token,customer_id);
+                        presenter.addWishList(api_token,products.get(position).getProductId(),customer_id);
                         isOpen = false;
                     }
                 } else {
@@ -96,7 +96,7 @@ public class SubCategoriesAdapter  extends RecyclerView.Adapter<SubCategoriesAda
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(api_token) &&  !TextUtils.isEmpty(customer_id)) {
                     presenter = new SubCategoriesPresenterImpl((ISubCategories.View) context, new SubCategoriesControllerImpl());
-                    presenter.addToCart(products.get(position).getProductId(), api_token,customer_id);
+                    presenter.addToCart(products.get(position).getProductId() ,api_token,customer_id);
                 }
             }
         });

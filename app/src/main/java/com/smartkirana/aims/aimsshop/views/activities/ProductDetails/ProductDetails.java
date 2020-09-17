@@ -19,15 +19,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 import com.smartkirana.aims.aimsshop.Conn;
 import com.smartkirana.aims.aimsshop.R;
 import com.smartkirana.aims.aimsshop.utils.AppUtils;
 import com.smartkirana.aims.aimsshop.utils.Constants;
 import com.smartkirana.aims.aimsshop.utils.PrefConstants;
+import com.smartkirana.aims.aimsshop.views.activities.Cart.CartActivity;
+import com.smartkirana.aims.aimsshop.views.activities.WishList.WishListActivity;
 import com.smartkirana.aims.aimsshop.views.activities.base.BaseActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -47,13 +51,14 @@ public class ProductDetails extends BaseActivity implements IProductDetails.View
     private RecentProductAdapter recentProductAdapter;
     CardView card_related_products, product_description_card;
     List<ProductDetailsModel.RelatedProduct> relatedProducts;
-    private String api_token,customer_id;
+    private String api_token, customer_id;
     private Button addToCart;
     private ImageButton fav_button, compare_product;
     private View view;
     private ProgressBar progressBar;
     boolean isOpen = false;
     ArrayList<String> productIdList = new ArrayList<>();
+    ConstraintLayout containerProductDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,7 @@ public class ProductDetails extends BaseActivity implements IProductDetails.View
         product_image = findViewById(R.id.product_image);
         heading_title = findViewById(R.id.product_name);
         product_code = findViewById(R.id.product_code);
+        containerProductDetails = findViewById(R.id.containerProductDetails);
         related_product_recycler = findViewById(R.id.related_product_recycler);
         special_product_price = findViewById(R.id.product_special_price);
         card_related_products = findViewById(R.id.card_related_products);
@@ -84,7 +90,7 @@ public class ProductDetails extends BaseActivity implements IProductDetails.View
 
         SharedPreferences prefs = getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
-        customer_id= prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
+        customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
         addToCart.setOnClickListener(this);
         fav_button.setOnClickListener(this);
         compare_product.setOnClickListener(this);
@@ -185,15 +191,27 @@ public class ProductDetails extends BaseActivity implements IProductDetails.View
 
     @Override
     public void onSuccessAddToCart(@Nullable String message) {
-
+        Snackbar snackbar = Snackbar
+                .make(containerProductDetails, "Added to Cart !!!", Snackbar.LENGTH_LONG);
+        snackbar.setAction("View Cart", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProductDetails.this, CartActivity.class));
+                finish();
+            }
+        });
+        snackbar.setTextColor(Color.WHITE);
+        snackbar.setBackgroundTint(Color.BLACK);
+        snackbar.setActionTextColor(Color.parseColor("#008000"));
+        snackbar.show();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addToCart:
-                if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id)&& !TextUtils.isEmpty(customer_id)) {
-                    presenter.addToCart(product_id,customer_id, api_token);
+                if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id) && !TextUtils.isEmpty(customer_id)) {
+                    presenter.addToCart(product_id, customer_id, api_token);
                 } else {
                     Toast.makeText(this, "Please login First", Toast.LENGTH_SHORT).show();
                 }
@@ -203,7 +221,7 @@ public class ProductDetails extends BaseActivity implements IProductDetails.View
                 if (!TextUtils.isEmpty(api_token) && !TextUtils.isEmpty(product_id) && !TextUtils.isEmpty(customer_id)) {
                     if (isOpen) {
                         fav_button.setColorFilter(Color.parseColor("#FD0505"));
-                        presenter.addWishList(product_id, api_token,customer_id);
+                        presenter.addWishList(product_id, api_token, customer_id);
                         isOpen = false;
 
                     } else {
@@ -225,6 +243,18 @@ public class ProductDetails extends BaseActivity implements IProductDetails.View
 
     @Override
     public void onSuccessWishList(@Nullable String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar
+                .make(containerProductDetails, "Added to WishList !!!", Snackbar.LENGTH_LONG);
+        snackbar.setAction("View Wishlist", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProductDetails.this, WishListActivity.class));
+                finish();
+            }
+        });
+        snackbar.setTextColor(Color.WHITE);
+        snackbar.setBackgroundTint(Color.BLACK);
+        snackbar.setActionTextColor(Color.parseColor("#008000"));
+        snackbar.show();
     }
 }
