@@ -183,7 +183,6 @@ public interface RetrofitInterface {
                               @Field("country_id") String country_id);
 
 
-
     @FormUrlEncoded
     @POST(EndPoints.API)
     Call<ResponseBody> addOrder(@Query("route") String route,
@@ -213,15 +212,17 @@ public interface RetrofitInterface {
 
     @GET(EndPoints.API)
     Call<ResponseBody> infoOrder(@Query("route") String route,
-                                   @Query("api_token") String api_token,
-                                   @Query("order_id") String order_id);
+                                 @Query("api_token") String api_token,
+                                 @Query("order_id") String order_id);
 
     @GET(EndPoints.API)
     Call<ResponseBody> historyOrder(@Query("route") String route,
-                                   @Query("api_token") String api_token,
-                                   @Query("order_id") String order_id);
+                                    @Query("api_token") String api_token,
+                                    @Query("order_id") String order_id);
 
 
+    @GET(EndPoints.API)
+    Call<ResponseBody> getOutletList(@Query("route") String route);
 
 
 }

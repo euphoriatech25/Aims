@@ -203,9 +203,9 @@ public class CheckoutActivity extends BaseActivity implements  ICheckout.View,Vi
         String module = "AIMSSHOP";
         String username = "aimsshop";
         String password = "ime@1234";
-        String reference_value = "Reference Value";
-        String amount = "2000.00";
-        String merchant_transaction_recording_url = "https://merchantname.com/merchant_transaction_recording_method";
+        String reference_value = "31";
+        String amount = "200.00";
+        String merchant_transaction_recording_url = "http://aimsshop.net/index.php?route=api/aims/imepay/setTransaction&customer_id="+customer_id;
 
         IMEPayment imePayment = new IMEPayment(this, ENVIRONMENT.TEST);
 

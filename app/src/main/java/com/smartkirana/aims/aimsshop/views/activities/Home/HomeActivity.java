@@ -166,7 +166,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         changeStatusBarColor();
@@ -183,6 +182,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         categoriesList = findViewById(R.id.expandable_categories);
+        Intent intent=getIntent();
+        String getMessage=intent.getStringExtra("message12345");
+        Toast.makeText(this, getMessage, Toast.LENGTH_SHORT).show();
 
         initFragment();
         initListeners();

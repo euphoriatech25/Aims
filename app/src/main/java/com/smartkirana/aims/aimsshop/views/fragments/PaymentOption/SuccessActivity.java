@@ -1,6 +1,7 @@
 package com.smartkirana.aims.aimsshop.views.fragments.PaymentOption;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,12 +17,12 @@ public class SuccessActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        TextView textView = findViewById(R.id.successDetails);
-//        String responseData = getIntent().getStringExtra("refID") + " - " + getIntent().getStringExtra("amount") + " - " + getIntent().getStringExtra("invoice") + " - " + getIntent().getStringExtra("status");
-//        textView.setText(responseData);
-//
-//        String failureResponse = "Error Message: " + getIntent().getStringExtra("On_Failure");
-//        textView.setText(failureResponse);
+        TextView textView = findViewById(R.id.successDetails);
+        String responseData = getIntent().getStringExtra("refID") + " - " + getIntent().getStringExtra("amount") + " - " + getIntent().getStringExtra("invoice") + " - " + getIntent().getStringExtra("status");
+        textView.setText(responseData);
+
+        String failureResponse = "Error Message: " + getIntent().getStringExtra("On_Failure");
+        textView.setText(failureResponse);
     }
 
 }
