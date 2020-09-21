@@ -231,10 +231,10 @@ public class CartActivity extends BaseActivity implements ICart.View, View.OnCli
                 break;
 
             case R.id.checkout:
+                selectedProducts= Conn.selectedProduct.get(Constants.SELECTED_PRODUCT);
                 if (selectedProducts.size() != 0) {
                     if (!api_token.equalsIgnoreCase("No Api Token Found")) {
-                        Conn.selectedProduct.put(Constants.SELECTED_PRODUCT, selectedProducts);
-                        startActivity(new Intent(this, CheckoutActivity.class));
+                          startActivity(new Intent(this, CheckoutActivity.class));
                     } else {
                         AppUtils.showToast(this, "Please Login/Sign U first ");
                         startActivity(new Intent(this, LoginActivity.class));

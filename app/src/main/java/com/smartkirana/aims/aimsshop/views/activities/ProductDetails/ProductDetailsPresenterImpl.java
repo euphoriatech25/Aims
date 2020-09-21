@@ -81,7 +81,7 @@ public class ProductDetailsPresenterImpl implements IProductDetails.Presenter, I
     @Override
     public void addToCart(@NotNull String product_id,@NotNull String customer_id,@NotNull String api_token) {
         if(view!=null){
-            controller.addToCart(EndPoints.ADD_TO_CART, api_token,customer_id, product_id, this);
+            controller.addToCart(EndPoints.CARD_ADD, api_token,customer_id, product_id, this);
         }else {
             view.unKnownError();
         }

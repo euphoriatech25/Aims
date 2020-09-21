@@ -8,9 +8,9 @@
     android:layout_marginLeft="@dimen/dp5"
     android:layout_height="wrap_content">
 
-    <com.smartkirana.aims.aimsshop.CircularImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:scaleType="fitXY"
         android:layout_margin="@dimen/dp5"
         android:id="@+id/categories_thumb_id" />
@@ -22,5 +22,5 @@
             android:text="@string/product_name"
             android:textSize="12sp"
             android:gravity="center"
-            android:textColor="@color/account" />
+            android:fontFamily="sans-serif-medium"/>
 </LinearLayout>

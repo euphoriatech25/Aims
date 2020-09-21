@@ -101,7 +101,7 @@ public class SearchPresenterImpl implements ISearch.Presenter, ISearch.OnFinishL
     @Override
     public void addToCart(@NotNull String product_id,@NotNull String customer_id,@NotNull String api_token) {
         if(view!=null){
-            controller.addToCart(EndPoints.ADD_TO_CART, api_token, product_id,customer_id, this);
+            controller.addToCart(EndPoints.CARD_ADD, api_token, product_id,customer_id, this);
         }else {
             view.unKnownError();
         }

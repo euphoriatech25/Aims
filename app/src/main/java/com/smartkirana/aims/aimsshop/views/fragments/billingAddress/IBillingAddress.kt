@@ -21,9 +21,8 @@ interface IBillingAddress {
         fun setCity()
         fun setCountry()
         fun setRegion()
-        fun onSuccess()
 
-
+        fun onSuccess(addressId:String)
         fun onSuccessAvailableAddress(availableModel:AvailableModel)
         fun onSuccessCountry(countryModel: CountryModel)
         fun onSuccessState(stateModel: StateModel)
@@ -41,14 +40,14 @@ interface IBillingAddress {
 
 
     interface Controller {
-        fun addAddress(route: String, api_token: String, customer_id: String, billingAddressModel: BillingAddressModel, listener: OnFinishListener)
+        fun addAddress(route: String, api_token: String, customer_id: String, billingAddressModel: BillingAddressModel.Address, listener: OnFinishListener)
         fun getAvailableAddress(route: String, api_token: String, customer_id: String,  listener: OnFinishListener)
         fun getAvailableCountries(route: String, api_token: String,  listener: OnFinishListener)
         fun getAvailableState(route: String, api_token: String,country_id: String, listener: OnFinishListener)
     }
 
     interface OnFinishListener : BaseResponse {
-        fun onSuccess(message: String?)
+        fun onSuccess(addressId:String?)
         fun onSuccessCountry(countryModel: CountryModel)
         fun onSuccessAvailableAddress(availableModel:AvailableModel)
         fun onSuccessState(stateModel: StateModel)

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <RadioGroup
-        android:id="@+id/radio"
+        android:id="@+id/radioPaymentGateWay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -15,13 +15,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
-            android:id="@+id/radioFemale"
+            android:id="@+id/radioCellPay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/online_payment" />
 
         <RadioButton
-            android:id="@+id/radioMale"
+            android:id="@+id/radioCOD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -30,7 +30,7 @@
     </RadioGroup>
     <TextView
         android:layout_width="match_parent"
-        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginStart="@dimen/dp10"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:text="Add Comments About Your Order" />

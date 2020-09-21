@@ -5,16 +5,15 @@ import com.smartkirana.aims.aimsshop.network.ServiceConfig;
 
 import org.jetbrains.annotations.NotNull;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BillingAddressControllerImpl implements IBillingAddress.Controller {
     @Override
-    public void addAddress(@NotNull String route, @NotNull String api_token, @NotNull String customer_id, @NotNull BillingAddressModel billingAddressModel, @NotNull IBillingAddress.OnFinishListener listener) {
+    public void addAddress(@NotNull String route, @NotNull String api_token, @NotNull String customer_id, @NotNull BillingAddressModel.Address billingAddressModel, @NotNull IBillingAddress.OnFinishListener listener) {
         RetrofitInterface post = ServiceConfig.createService(RetrofitInterface.class);
-        Call<ResponseBody> call = post.addAddress(route, api_token, customer_id,
+        Call<BillingAddressModel> call = post.addAddress(route, api_token, customer_id,
                 billingAddressModel.getFirstname(),
                 billingAddressModel.getLastname(),
                 billingAddressModel.getCompany(),
@@ -24,12 +23,15 @@ public class BillingAddressControllerImpl implements IBillingAddress.Controller 
                 billingAddressModel.getCity(),
                 "2315",
                 billingAddressModel.getCountry_id());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<BillingAddressModel>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<BillingAddressModel> call, Response<BillingAddressModel> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        listener.onSuccess(response.message());
+                        BillingAddressModel model=response.body();
+                        BillingAddressModel.Address address=model.getAddress();
+                        String addressId=address.getAddress_id();
+                        listener.onSuccess(addressId);
                     } else {
                         listener.onNoData();
                     }
@@ -41,7 +43,7 @@ public class BillingAddressControllerImpl implements IBillingAddress.Controller 
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable throwable) {
+            public void onFailure(Call<BillingAddressModel> call, Throwable throwable) {
 
             }
         });

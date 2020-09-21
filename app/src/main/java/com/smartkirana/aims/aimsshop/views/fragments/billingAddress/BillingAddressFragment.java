@@ -15,12 +15,15 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.smartkirana.aims.aimsshop.R;
 import com.smartkirana.aims.aimsshop.utils.AppUtils;
 import com.smartkirana.aims.aimsshop.utils.PrefConstants;
 import com.smartkirana.aims.aimsshop.views.activities.base.BaseFragment;
+import com.smartkirana.aims.aimsshop.views.fragments.PaymentOption.PaymentMethod;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -160,10 +163,7 @@ public class BillingAddressFragment extends BaseFragment implements IBillingAddr
         Toast.makeText(getContext(), "State Region Empty", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onSuccess() {
 
-    }
 
     @Override
     public void onFailure(@NotNull String message) {
@@ -242,8 +242,26 @@ public class BillingAddressFragment extends BaseFragment implements IBillingAddr
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, address);
                 adapter.setDropDownViewResource(R.layout.spinner_items);
                 spinnerAvaiable.setAdapter(adapter);
+                String text = spinnerAvaiable.getSelectedItem().toString();
+                Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
+
             }
+
         }
+    }
+
+    @Override
+    public void onSuccess(@NotNull String addressId) {
+
+        Toast.makeText(getContext(), addressId, Toast.LENGTH_SHORT).show();
+
+        Fragment fragment = new PaymentMethod();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.paymentMethod, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
 
 
     }

@@ -20,7 +20,6 @@ import com.smartkirana.aims.aimsshop.utils.PrefConstants;
 import com.smartkirana.aims.aimsshop.views.activities.Comparison.ProductComparison;
 import com.smartkirana.aims.aimsshop.views.activities.Home.HomeActivity;
 import com.smartkirana.aims.aimsshop.views.activities.Login.LoginActivity;
-import com.smartkirana.aims.aimsshop.views.activities.OnlinePayment.CellPayActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -67,8 +66,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), LoginActivity.class));
                 break;
             case R.id.payment_method:
-                startActivity(new Intent(getContext(), CellPayActivity.class));
-                break;
+                 break;
             case R.id.logout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Logout");

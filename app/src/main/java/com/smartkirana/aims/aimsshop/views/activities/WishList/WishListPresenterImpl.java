@@ -110,7 +110,7 @@ public class WishListPresenterImpl implements IWishList.Presenter, IWishList.OnF
         if (view != null) {
 //            if (AppUtils.isNetworkAvailable()) {
             view.showProgressBar(true);
-            controller.addToCart(EndPoints.ADD_TO_CART,api_token,product_id,customer_id,this);
+            controller.addToCart(EndPoints.CARD_ADD,api_token,product_id,customer_id,this);
 //            } else {
 //                view.noInternetConnection();
 //            }

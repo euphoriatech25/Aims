@@ -18,7 +18,7 @@ public class CartControllerImpl implements ICart.Controller {
     @Override
     public void editProductList(@NotNull String route, @NotNull String api_token, @NotNull String key, @NotNull String customer_id, @NotNull String quantity, @Nullable ICart.OnFinishListener listener) {
         RetrofitInterface retrofitInterface = ServiceConfig.createService(RetrofitInterface.class);
-        Call<ResponseBody> call = retrofitInterface.editAddToCart(route, api_token, key, quantity,customer_id);
+        Call<ResponseBody> call = retrofitInterface.editAddToCart(route, api_token,key, quantity,customer_id);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

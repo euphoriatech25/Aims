@@ -34,8 +34,7 @@ public class CategoriesFragment extends Fragment implements ICategories.View, Ca
         productRecycle = view.findViewById(R.id.recyclerviewFeature);
         presenter = new CategoriesPresenterImpl(this, new CategoriesControllerImpl());
         presenter.getFeatureCategoriesList();
-         layoutManager
-                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
 //        layoutManager = new GridLayoutManager(getContext(), 2);
         productRecycle.setLayoutManager(layoutManager);

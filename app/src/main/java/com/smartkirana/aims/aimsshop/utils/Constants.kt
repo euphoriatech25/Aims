@@ -31,6 +31,8 @@ class Constants {
         const val SELECTED_PRODUCT = "selectedProduct"
         const val LATITUDE = "latitude"
         const val LONGITUDE = "longitude"
+        const val BILLINGADDRESSID = "address_id"
+        const val DELIVERYDETAILSID = "shipping_address_id"
 
 
 

@@ -81,11 +81,16 @@ public class SubCategories extends BaseActivity implements ISubCategories.View, 
 
     @Override
     public void onSuccess(@NotNull SubCategoriesModel subCategoriesModel) {
-        SubCategoriesAdapter subCategoriesAdapter;
-        product = subCategoriesModel.getCategories().getProducts();
-        subCategoriesAdapter = new SubCategoriesAdapter(SubCategories.this, product);
-        subCategoriesRecycler.setAdapter(subCategoriesAdapter);
-        subCategoriesAdapter.setOnItemClickListener(SubCategories.this);
+
+            SubCategoriesAdapter subCategoriesAdapter;
+            product = subCategoriesModel.getCategories().getProducts();
+            if(product.size()!=0){
+            subCategoriesAdapter = new SubCategoriesAdapter(SubCategories.this, product);
+            subCategoriesRecycler.setAdapter(subCategoriesAdapter);
+            subCategoriesAdapter.setOnItemClickListener(SubCategories.this);
+            }else {
+                Toast.makeText(this, "No Products Found", Toast.LENGTH_SHORT).show();
+            }
     }
 
     @Override

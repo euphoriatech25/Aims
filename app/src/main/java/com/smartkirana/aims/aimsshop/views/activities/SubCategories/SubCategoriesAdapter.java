@@ -10,10 +10,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -57,6 +59,10 @@ public class SubCategoriesAdapter  extends RecyclerView.Adapter<SubCategoriesAda
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewCartHolder holder, int position) {
+        holder.product_image.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
+        holder.productCart.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale_animation));
+
+
         holder.product_name.setText(products.get(position).getName());
         String special = products.get(position).getSpecial();
         Glide.with(context).load(products.get(position).getThumb()).into(holder.product_image);
@@ -119,10 +125,10 @@ public class SubCategoriesAdapter  extends RecyclerView.Adapter<SubCategoriesAda
     class RecyclerViewCartHolder extends RecyclerView.ViewHolder {
         ImageView product_image, wishlist_fav, addToCart;
         TextView product_name, product_unit_price, product_total_price,product_description;
-
+CardView productCart;
         public RecyclerViewCartHolder(@NonNull View itemView) {
             super(itemView);
-
+            productCart=itemView.findViewById(R.id.productCart);
             product_image = itemView.findViewById(R.id.home_product_image);
             product_name = itemView.findViewById(R.id.product_name);
             product_unit_price = itemView.findViewById(R.id.product_actual_price);

@@ -16,7 +16,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.smartkirana.aims.aimsshop.Conn;
 import com.smartkirana.aims.aimsshop.R;
+import com.smartkirana.aims.aimsshop.utils.AppUtils;
 import com.smartkirana.aims.aimsshop.utils.Constants;
 import com.smartkirana.aims.aimsshop.utils.PrefConstants;
 import com.smartkirana.aims.aimsshop.views.activities.ProductDetails.ProductDetails;
@@ -87,19 +89,25 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyView
         SharedPreferences prefs = context.getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
         customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
+         String name = cartList.get(i).getName();
+        presenter = new CartPresenterImpl((ICart.View)context, new CartControllerImpl());
+
         List<CartModel.Product> selectedProducts = new ArrayList<CartModel.Product>();
-        String name = cartList.get(i).getName();
-        int finalI = i;
-
-
-
 
         holder.selectProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                selectedProducts.add(product.get(finalI));
+                selectedProducts.add(cartList.get(i));
             }
         });
+        if (selectedProducts != null) {
+            if (!api_token.equalsIgnoreCase("No Api Token Found")) {
+                Conn.selectedProduct.put(Constants.SELECTED_PRODUCT, selectedProducts);
+                 } else {
+                AppUtils.showToast(context, "Please Login/Sign U first ");
+                  }
+        }
+
 
 //            Initialization of Value
         holder.product_name.setText(cartList.get(i).getName());
@@ -155,7 +163,10 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyView
         holder.quantity_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.editCartProduct(cart_id, holder.product_quantity.getText().toString(), customer_id, api_token);
+                 if(cart_id!=null&& holder.product_quantity.getText().toString()!=null&&customer_id!=null&&api_token!=null) {
+                    presenter.editCartProduct(cart_id, holder.product_quantity.getText().toString(), customer_id, api_token);
+                }else {
+                  }
             }
         });
     }

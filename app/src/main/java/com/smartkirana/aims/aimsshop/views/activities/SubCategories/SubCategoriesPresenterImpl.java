@@ -112,7 +112,7 @@ public class SubCategoriesPresenterImpl implements ISubCategories.Presenter, ISu
         if (view != null) {
 //            if (AppUtils.isNetworkAvailable()) {
             view.showProgressBar(true);
-            controller.addToCart(EndPoints.ADD_TO_CART,api_token, product_id,customer_id,this);
+            controller.addToCart(EndPoints.CARD_ADD,api_token, product_id,customer_id,this);
 //            } else {
 //                view.noInternetConnection();
 //            }

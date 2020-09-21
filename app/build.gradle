@@ -8,7 +8,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.smartkirana.aims.aimsshop"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -75,7 +75,7 @@ dependencies {
 //    implementation "androidx.paging:paging-runtime:$paging_version" // For Kotlin use paging-runtime-ktx
 //    implementation 'android.arch.lifecycle:extensions:1.1.1'
 
-
+    implementation 'com.swifttechnology.imepaysdk:payment-service:3.0.1'
     implementation 'com.github.cellcom-nepal:cellpay-sdk:1.2'
 }
 repositories {

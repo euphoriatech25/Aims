@@ -90,7 +90,7 @@ public class FeaturedPresenterImpl implements IFeature.Presenter, IFeature.OnFin
     @Override
     public void addToCart(@NotNull String product_id,@NotNull String customer_id,@NotNull String api_token) {
         if(product_id!=null&&api_token!=null&&customer_id!=null) {
-            controller.addToCart(EndPoints.ADD_TO_CART, api_token, product_id, customer_id,this);
+            controller.addToCart(EndPoints.CARD_ADD, api_token, product_id, customer_id,this);
         }else {
 
         }

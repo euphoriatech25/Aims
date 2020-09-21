@@ -1,7 +1,6 @@
 package com.smartkirana.aims.aimsshop.views.fragments.billingAddress;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.smartkirana.aims.aimsshop.utils.EndPoints;
 
@@ -21,7 +20,7 @@ public class BillingAddressPresenterImpl implements IBillingAddress.Presenter, I
     public void onSuccess(@Nullable String message) {
         if (view != null) {
             view.showProgressBar(false);
-            view.onSuccess();
+            view.onSuccess(message);
         }
     }
 
@@ -103,7 +102,7 @@ public class BillingAddressPresenterImpl implements IBillingAddress.Presenter, I
 
             if (!hasError) {
                 view.showProgressBar(true);
-                BillingAddressModel model = new BillingAddressModel();
+                BillingAddressModel.Address model = new BillingAddressModel.Address();
                 model.setFirstname(firstName);
                 model.setLastname(lastName);
                 model.setCompany(companyName);
@@ -113,7 +112,6 @@ public class BillingAddressPresenterImpl implements IBillingAddress.Presenter, I
                 model.setPostcode(postCode);
                 model.setRegion_state(region);
                 model.setCountry_id(country);
-                Log.e("Region",region);
                 controller.addAddress(EndPoints.ADDRESS_ADD,api_token, customer_id, model, this);
             }
         }

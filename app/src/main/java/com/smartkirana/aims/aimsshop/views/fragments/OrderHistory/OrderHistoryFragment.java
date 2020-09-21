@@ -25,10 +25,7 @@ public class OrderHistoryFragment extends BaseFragment implements IOrderHistory.
     OrderHistoryPresenterImpl presenter;
     String api_token;
     ImageButton viewOrderDetail,viewOrderLocation;
-    private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
-//    LinearLayout orderHistory;
     OrderHistoryModel.Order orderHistoryDetails;
-
     TextView cart_id, customer_name, no_of_products, status, total_price, product_date_added;
 
 

@@ -52,7 +52,7 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
     @NonNull
     @Override
     public RecyclerViewCartHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product_layout, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.feature_product_view, viewGroup, false);
         return new RecyclerViewCartHolder(view);
     }
 
@@ -115,11 +115,11 @@ public class FeaturedCategoriesAdapter extends RecyclerView.Adapter<FeaturedCate
         if (special.equalsIgnoreCase("false")) {
             holder.product_unit_price.setText(featureds.get(position).getPrice());
         } else {
+            holder.product_total_price.setVisibility(View.VISIBLE);
             holder.product_unit_price.setText(featureds.get(position).getSpecial());
             holder.product_total_price.setText(featureds.get(position).getPrice());
             holder.product_total_price.setPaintFlags(holder.product_total_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.itemCardPromotion.setVisibility(View.VISIBLE);
-//            float dis=100*((Float.parseFloat(featureds.get(position).getPrice())-Float.parseFloat(featureds.get(position).getSpecial()))/Float.parseFloat(featureds.get(position).getPrice()));
             holder.itemCardPromotion.setText("-"+"20"+"%");
 
         }

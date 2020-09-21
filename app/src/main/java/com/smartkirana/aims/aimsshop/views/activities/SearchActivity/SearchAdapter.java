@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,10 +56,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewCartHolder holder, int position) {
+        holder.product_image.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
+        holder.productCart.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale_animation));
+
         presenter = new SearchPresenterImpl((ISearch.View) context, new SearchControllerImpl());
         SharedPreferences prefs = context.getSharedPreferences(PrefConstants.USER_DETAILS_PREF, MODE_PRIVATE);
-
-
         api_token = prefs.getString(PrefConstants.API_TOKEN, PrefConstants.DEFAULT_VALUE);
         customer_id = prefs.getString(PrefConstants.CUSTOMER_ID, PrefConstants.DEFAULT_VALUE);
 

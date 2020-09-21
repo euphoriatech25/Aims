@@ -213,17 +213,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        categoriesList.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+        categoriesList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
-            public void onGroupCollapse(int groupPosition) {
-                if (categoriesListModelCategories.get(groupPosition).getChildren().size() == 0) {
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                if (categoriesListModelCategories.get(i).getChildren().size() == 0) {
                     Intent intent = new Intent(HomeActivity.this, SubCategories.class);
-                    intent.putExtra(Constants.PATH, categoriesListModelCategories.get(groupPosition).getPath());
-                    intent.putExtra(Constants.PRODUCT_NAME, categoriesListModelCategories.get(groupPosition).getName());
-                    intent.putExtra(Constants.PRODUCT_PATH, categoriesListModelCategories.get(groupPosition).getName());
+                    intent.putExtra(Constants.PATH, categoriesListModelCategories.get(i).getPath());
+                    intent.putExtra(Constants.PRODUCT_NAME, categoriesListModelCategories.get(i).getName());
+                    intent.putExtra(Constants.PRODUCT_PATH, categoriesListModelCategories.get(i).getName());
                     startActivity(intent);
-                } else {
-                }
+                }  return false;
             }
         });
     }
@@ -240,7 +239,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void changeStatusBarColor() {
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.account));
+        window.setStatusBarColor(getResources().getColor(R.color.red));
 
     }
 
